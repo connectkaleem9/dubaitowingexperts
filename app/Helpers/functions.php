@@ -256,9 +256,9 @@ function media_url(?array $media, int $width = 1600): ?string
 }
 
 /**
- * Turns a media record into the custom properties the `.hero--bg` hero background reads:
- * the image itself and its aspect ratio, which sets the image's height on phones.
- * Returns '' when there is no image, so the caller falls back to the plain gradient hero.
+ * Turns a media record into the `--hero-img` custom property that the `.hero--bg` hero
+ * background reads. Returns '' when there is no image, so the caller falls back to the
+ * plain gradient hero.
  */
 function hero_bg_style(?array $media): string
 {
@@ -270,7 +270,6 @@ function hero_bg_style(?array $media): string
     $url = (string) parse_url($url, PHP_URL_PATH);
     // Quotes and parentheses would end the CSS url() early; generated filenames never contain them.
     $url = str_replace(["'", '"', '(', ')', '\\'], '', $url);
-    $ratio = round(((int) $media['height'] / max(1, (int) $media['width'])) * 100, 3);
 
-    return ' style="--hero-img:url(\'' . e($url) . '\');--hero-ratio:' . $ratio . '%"';
+    return ' style="--hero-img:url(\'' . e($url) . '\')"';
 }

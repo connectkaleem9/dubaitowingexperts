@@ -12,15 +12,15 @@ final class Review
 
     private const SELECT = 'SELECT r.*, s.name AS service_name, s.slug AS service_slug FROM reviews r LEFT JOIN services s ON s.id = r.service_id';
 
-    /** @return array{items: list<array<string, mixed>>, total: int} */
-    public static function paginateApproved(int $page, int $perPage): array
+    /**
+     * Every approved review, featured first then newest. The public page deliberately shows them
+     * all on one URL with no paging, so no review is ever hidden behind a page number.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public static function allApproved(): array
     {
-        $total = (int) Database::value("SELECT COUNT(*) FROM reviews WHERE status = 'approved'");
-        $items = Database::all(
-            self::SELECT . " WHERE r.status = 'approved' ORDER BY r.is_featured DESC, r.approved_at DESC LIMIT :lim OFFSET :off",
-            ['lim' => $perPage, 'off' => ($page - 1) * $perPage]
-        );
-        return ['items' => $items, 'total' => $total];
+        return Database::all(self::SELECT . " WHERE r.status = 'approved' ORDER BY r.is_featured DESC, r.approved_at DESC");
     }
 
     /** Featured first, then newest approved; optionally for a service. */

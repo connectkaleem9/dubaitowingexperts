@@ -10,6 +10,7 @@ use App\Core\Session;
 use App\Models\Review;
 use App\Models\Service;
 use App\Services\FormGuard;
+use App\Services\SampleContent;
 use App\Services\Seo;
 use App\Services\Uploader;
 use App\Validation\Validator;
@@ -18,30 +19,26 @@ final class ReviewController extends Controller
 {
     public function index(Request $request): void
     {
-        $perPage = (int) config('app.per_page');
-        $page = $request->queryInt('page', 1);
-        $result = Review::paginateApproved($page, $perPage);
-        $pager = $this->pagination($page, $result['total'], $perPage);
+        // Every approved review on one page — no paging, however many there are.
+        $preview = SampleContent::wanted($request);
+        $reviews = $preview ? SampleContent::reviews() : Review::allApproved();
+        $stats = $preview ? SampleContent::reviewStats() : Review::approvedStats();
 
         $seo = Seo::page(
             '/reviews/',
             'Customer Reviews | ' . business('name'),
             'Read reviews from drivers we have helped across Dubai, or leave your own review of our car recovery and towing service.',
-            $result['total'] === 0 ? 'noindex,follow' : 'index,follow'
+            $reviews === [] || $preview ? 'noindex,follow' : 'index,follow'
         )->type('reviews')->crumbs('Reviews', '/reviews/');
-        if ($page > 1) {
-            $seo->path = '/reviews/?page=' . $page;
-            $seo->title = 'Page ' . $page . ' – ' . $seo->title;
-        }
 
         $this->view('reviews/index', [
             'seo' => $seo,
-            'reviews' => $result['items'],
-            'reviewImages' => Review::imagesFor(array_column($result['items'], 'id')),
-            'stats' => Review::approvedStats(),
+            'reviews' => $reviews,
+            'reviewImages' => $preview ? [] : Review::imagesFor(array_column($reviews, 'id')),
+            'stats' => $stats,
             'services' => Service::published(),
-            'pager' => $pager,
             'submitted' => (bool) Session::getFlash('review_submitted', false),
+            'preview' => $preview,
         ]);
     }
 

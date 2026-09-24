@@ -7,6 +7,7 @@
     --c-red: #DD0310;
     --c-red-600: #B80009;
     --c-red-50: #FFF1F2;
+    --c-red-on-dark: #FF5A5A;  /* brand red lightened for AA contrast over the dark hero */
     --c-navy: #0B2946;          /* dark section bands */
     --c-navy-800: #04264A;      /* top bar */
     --c-navy-900: #011B30;      /* footer */
@@ -192,19 +193,34 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
  */
 .hero--photo { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
 /*
- * Phones: the photo is the hero's background image, shown complete at full width and full
- * strength (no crop, no wash). The copy starts below it — the padding equals the image height
- * at 100% width (source is 1920×800, so 41.67vw).
+ * Phones: the photo fills the whole hero and the copy sits on top of it, so the section reads as
+ * one block instead of a picture with text stranded underneath. A navy scrim over the photo keeps
+ * every piece of text above 4.5:1 against the brightest part of the sky.
+ * .hero--bg (service and area pages) gets the same treatment from its own --hero-img.
  */
 @media (max-width: 899px) {
-    .hero--photo {
-        background-color: #FDF3EC;
-        background-image: url('/assets/img/hero-bg.webp');
+    .hero--photo, .hero--bg {
+        background-color: var(--c-navy-900);
+        background-image:
+            linear-gradient(180deg, rgba(1, 27, 48, .68) 0%, rgba(1, 27, 48, .78) 45%, rgba(1, 27, 48, .92) 100%),
+            var(--hero-img, url('/assets/img/hero-bg.webp'));
         background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-position: top center;
-        padding-top: calc(41.667vw + var(--s-6));
+        background-size: cover;
+        background-position: center;
+        padding: var(--s-7) 0 var(--s-8);
     }
+    .hero--photo h1, .hero--bg h1,
+    .hero--photo .eyebrow, .hero--bg .eyebrow { color: #fff; }
+    .hero--photo h1 .accent, .hero--bg h1 .accent { color: var(--c-red-on-dark); }
+    .hero--photo .hero__lead, .hero--bg .hero__lead { color: rgba(255, 255, 255, .93); }
+    .hero--photo .hero__phone, .hero--bg .hero__phone { color: rgba(255, 255, 255, .82); }
+    .hero--photo .hero__phone a, .hero--bg .hero__phone a { color: #fff; }
+    .hero--photo .trust-list, .hero--bg .trust-list { color: rgba(255, 255, 255, .93); }
+    .hero--photo .trust-list .icon, .hero--bg .trust-list .icon { color: var(--c-red-on-dark); }
+    .hero--photo .hero__stats { border-top-color: rgba(255, 255, 255, .22); }
+    .hero--photo .hero__stats .icon, .hero--photo .hero__stats strong { color: #fff; }
+    .hero--photo .hero__stats span { color: rgba(255, 255, 255, .78); }
+    .hero--photo .hero__stats li + li { border-left-color: rgba(255, 255, 255, .22); }
 }
 .hero__photo { display: none; }
 @media (min-width: 900px) {
@@ -278,17 +294,6 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
  * Declared after .hero--compact so the phone padding below wins over its shorthand.
  */
 .hero--bg { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
-@media (max-width: 899px) {
-    .hero--bg {
-        background-color: #FDF3EC;
-        background-image: var(--hero-img);
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        background-position: top center;
-        /* A percentage padding resolves against the width, so this is exactly the image's height. */
-        padding-top: calc(var(--hero-ratio, 60%) + var(--s-6));
-    }
-}
 @media (min-width: 900px) {
     .hero--bg { min-height: 460px; display: grid; align-items: center; }
     .hero--bg::before {
@@ -571,20 +576,63 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 @media (prefers-reduced-motion: reduce) { .carousel-track { transition: none; } }
 
 /* ---------- Reviews ---------- */
-.review { background: #fff; border: 1px solid var(--c-border); border-radius: var(--r-md); padding: var(--s-5); margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
-.review blockquote { margin: 0; color: var(--c-text); }
-.review footer { font-size: var(--fs-small); color: var(--c-muted); }
-.review cite { font-style: normal; font-weight: 700; color: var(--c-heading); }
-.review__person { display: flex; align-items: center; gap: 12px; }
+/* Card: quote mark, stars, the review, then the person — as in the approved design. */
+.review {
+    background: #fff; border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: var(--s-5);
+    margin: 0; display: flex; flex-direction: column; gap: var(--s-3); box-shadow: var(--sh-1);
+}
+.review__quote { font-size: 2.6rem; line-height: .7; color: #F6C9CC; font-weight: 800; }
+.review blockquote { margin: 0; color: var(--c-text); flex: 1; }
+.review blockquote p:last-child { margin-bottom: 0; }
+.review cite { font-style: normal; font-weight: 700; color: var(--c-heading); display: block; }
+.review__person { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: var(--s-3); border-top: 1px solid var(--c-border); }
+.review__meta { display: block; font-size: var(--fs-small); color: var(--c-muted); }
 .review__avatar {
     width: 48px; height: 48px; border-radius: 50%; flex: none; display: grid; place-items: center;
-    background: var(--c-navy); color: #fff; font-weight: 700; font-size: 1rem;
+    background: var(--c-red-50); color: var(--c-red); font-weight: 700; font-size: .95rem; letter-spacing: .03em;
 }
 .stars { display: inline-flex; gap: 2px; color: #F5A623; }
 .stars .icon { width: 17px; height: 17px; }
 .stars .off { color: #D7DEE7; }
 .review__photos { display: flex; gap: 8px; }
 .review__photos img { width: 92px; height: 70px; object-fit: cover; border-radius: var(--r-sm); }
+
+/*
+ * Carousel card: photo/initials on the left, name, stars and the quote beside it. The pieces are
+ * placed explicitly on a grid, so the same markup serves both layouts without reordering the DOM.
+ */
+.review--wide { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px var(--s-5); align-items: start; padding: var(--s-5) var(--s-6); }
+.review--wide .review__quote { display: none; }
+.review--wide .review__person { display: contents; }
+.review--wide .review__avatar { grid-column: 1; grid-row: 1 / span 3; width: 68px; height: 68px; font-size: 1.15rem; align-self: center; }
+.review--wide .review__person > span:last-child { grid-column: 2; grid-row: 1; }
+.review--wide > .stars { grid-column: 2; grid-row: 2; }
+.review--wide blockquote { grid-column: 2; grid-row: 3; margin-top: var(--s-2); }
+.review--wide .review__photos { grid-column: 2; grid-row: 4; }
+@media (max-width: 560px) {
+    /* Stacked: the person on the first line, then the stars and the quote across the full width. */
+    .review--wide { gap: 4px var(--s-4); padding: var(--s-5); }
+    .review--wide .review__avatar { grid-column: 1; grid-row: 1; width: 52px; height: 52px; font-size: .95rem; }
+    .review--wide .review__person > span:last-child { grid-column: 2; grid-row: 1; align-self: center; }
+    .review--wide > .stars { grid-column: 1 / -1; grid-row: 2; margin-top: var(--s-3); }
+    .review--wide blockquote { grid-column: 1 / -1; grid-row: 3; }
+    .review--wide .review__photos { grid-column: 1 / -1; grid-row: 4; }
+}
+
+/*
+ * Reviews page: every approved review in one grid — it keeps filling out as more arrive, with no
+ * paging, so the columns are set by available width rather than by a fixed count.
+ */
+.review-grid { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); align-items: stretch; }
+.review-grid .review { height: 100%; }
+
+/* Centred section intro, used above the "Leave Us a Review" form. */
+.container--narrow { width: min(760px, 100% - 2rem); margin-inline: auto; }
+.section-head--center { text-align: center; margin-bottom: var(--s-6); }
+.section-head--center p:last-child { margin-bottom: 0; }
+.eyebrow--center { justify-content: center; color: var(--c-red); }
+.eyebrow--center::before { display: none; }
+.cta-card--center { text-align: center; }
 
 /* ---------- FAQ ---------- */
 .faq { display: grid; gap: 10px; }
@@ -654,7 +702,8 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .rating-input input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .rating-input label { cursor: pointer; color: #D7DEE7; padding: 2px; }
 .rating-input label .icon { width: 32px; height: 32px; }
-.rating-input input:checked ~ label, .rating-input label:hover, .rating-input label:hover ~ label { color: #F5A623; }
+/* Red stars, as in the approved design; published reviews show the usual amber stars. */
+.rating-input input:checked ~ label, .rating-input label:hover, .rating-input label:hover ~ label { color: var(--c-red); }
 .rating-input input:focus-visible + label { outline: 3px solid var(--c-red); border-radius: 4px; }
 .alert { padding: 14px 16px; border-radius: var(--r-sm); border: 1px solid; font-weight: 500; font-size: .95rem; }
 .alert--success { background: var(--c-success-bg); border-color: #ABEFC6; color: var(--c-success); }

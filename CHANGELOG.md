@@ -2,6 +2,27 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-24 (late evening) — Reviews page and mobile hero
+
+### Changed
+- **Mobile hero rebuilt**: the photo now fills the whole hero with the headline, copy and buttons
+  on top of it, instead of sitting above the text as a separate band. A navy scrim keeps every
+  piece of text past 4.5:1 against the brightest part of the sky, and the accent red is lightened
+  (`--c-red-on-dark`) so "in Dubai" stays legible. Service and area heroes get the same treatment.
+- **Reviews page rebuilt to the approved design**: a card grid (quote mark, stars, the review,
+  then the person) followed by a centred "Leave Us a Review" section. The rating stars and the
+  submit button are red, as drawn.
+- **Every approved review now shows on one page — paging is gone.** However many reviews there
+  are, none is hidden behind a page number (`Review::allApproved()`).
+- **Home page review card** matches the design: initials/photo on the left, name, stars and the
+  quote beside it, with the existing arrows and dots.
+
+### Added
+- `App\Services\SampleContent` with `?preview=sample` — a **signed-in admin** can see the reviews
+  page and home page filled with sample reviews to judge the design. The response is noindex, the
+  page says plainly that it is a preview, and nothing is written to the database. Invented reviews
+  are never published: they mislead visitors and breach Google's review policies (decision D-016).
+
 ## 2026-09-24 (late) — Owner's layout changes (decision D-015)
 
 ### Changed

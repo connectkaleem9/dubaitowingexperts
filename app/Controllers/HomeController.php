@@ -11,6 +11,7 @@ use App\Models\Media;
 use App\Models\Project;
 use App\Models\Review;
 use App\Models\Service;
+use App\Services\SampleContent;
 use App\Services\Seo;
 
 final class HomeController extends Controller
@@ -28,7 +29,14 @@ final class HomeController extends Controller
         // page link to it; the rest are shown as plain tiles rather than links to thin pages.
         $areas = Area::all();
         $projects = Project::latestPublished(8); // the home slider loops through these
-        $reviews = Review::highlights(5);        // shown one at a time in the review carousel
+        // ?preview=sample lets a signed-in admin see the page filled out before real content exists.
+        $preview = SampleContent::wanted($request);
+        if ($preview) {
+            $seo->robots = 'noindex,nofollow';
+        }
+        $reviews = $preview
+            ? array_slice(SampleContent::reviews(), 0, 5)
+            : Review::highlights(5);             // shown one at a time in the review carousel
 
         $this->view('home', [
             'seo' => $seo,
@@ -39,7 +47,7 @@ final class HomeController extends Controller
             'projects' => $projects,
             'projectImages' => Media::findMany(array_column($projects, 'featured_image_id')),
             'reviews' => $reviews,
-            'reviewStats' => Review::approvedStats(),
+            'reviewStats' => $preview ? SampleContent::reviewStats() : Review::approvedStats(),
             'faqs' => Faq::forHome(5),
         ]);
     }

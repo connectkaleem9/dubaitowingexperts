@@ -13,12 +13,16 @@ $field = static function (string $name) use ($errors): array {
     ];
 };
 $rating = old('rating');
+// The reviews page puts its own heading above the form; elsewhere the form carries one itself.
+$heading = $heading ?? true;
 ?>
 <form class="form form--card" id="review-form" method="post" action="/reviews/" enctype="multipart/form-data" novalidate data-track-form="review">
-    <div>
-        <h2>Leave a review</h2>
-        <p class="muted">Tell other drivers how we helped. Reviews are checked before they are published.</p>
-    </div>
+    <?php if ($heading): ?>
+        <div>
+            <h2>Leave a review</h2>
+            <p class="muted">Tell other drivers how we helped. Reviews are checked before they are published.</p>
+        </div>
+    <?php endif; ?>
     <?php if (!empty($submitted)): ?>
         <div class="alert alert--success" role="status" data-conversion-event="review_submit">Thank you — your review has been received and will appear once it has been checked.</div>
         <?php if ($photoError = Session::getFlash('photo_error')): ?><div class="alert alert--info">Your photo could not be added: <?= e($photoError) ?></div><?php endif; ?>
@@ -97,5 +101,5 @@ $rating = old('rating');
         <?= $m ?>
     </div>
 
-    <button class="btn btn--primary btn--lg btn--block" type="submit">Submit review</button>
+    <button class="btn btn--call btn--lg btn--block" type="submit"><?= icon('star') ?>Submit review</button>
 </form>

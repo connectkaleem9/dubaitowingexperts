@@ -237,7 +237,7 @@ foreach (['clock', 'tag', 'shield', 'pin', 'whatsapp', 'route'] as $name) {
                         <div class="carousel-track">
                             <?php foreach ($reviews as $i => $r): ?>
                                 <div role="group" aria-roledescription="slide" aria-label="Review <?= $i + 1 ?> of <?= count($reviews) ?>">
-                                    <?= partial('review-card', ['review' => $r]) ?>
+                                    <?= partial('review-card', ['review' => $r, 'wide' => true]) ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
