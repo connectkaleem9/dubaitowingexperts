@@ -20,7 +20,8 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: var(--a-bg); color: var(--a-text); font-family: var(--a-font); font-size: 16px; line-height: 1.55; }
+/* padding-bottom resets site.css's room for the public sticky call bar, which admin pages omit. */
+body { margin: 0; background: var(--a-bg); color: var(--a-text); font-family: var(--a-font); font-size: 16px; line-height: 1.55; padding-bottom: 0; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--a-navy-700); }
 h1 { font-size: 1.6rem; margin: 0; }
@@ -33,8 +34,8 @@ h3 { font-size: 1rem; margin: 20px 0 8px; }
 .a-muted { color: var(--a-muted); }
 .a-warn { color: var(--a-warn); font-weight: 700; }
 
-/* Shell */
-.a-shell { display: grid; grid-template-columns: 1fr; min-height: 100vh; }
+/* Shell — the site header and footer sit outside it, so it only claims the space it needs. */
+.a-shell { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
 .a-side { background: var(--a-navy); color: #fff; padding: 16px; display: grid; gap: 16px; align-content: start; }
 .a-brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 800; }
 .a-brand img { width: auto; height: 46px; }
@@ -161,7 +162,7 @@ h3 { font-size: 1rem; margin: 20px 0 8px; }
 .a-pager [aria-current] { background: var(--a-navy); color: #fff; border-color: var(--a-navy); }
 
 /* Login */
-.a-login-body { display: grid; place-items: center; min-height: 100vh; padding: 20px; }
-.a-login { background: #fff; border: 1px solid var(--a-border); border-radius: 14px; padding: 28px; width: min(420px, 100%); display: grid; gap: 16px; justify-items: stretch; }
+.a-login-body .a-login { margin: clamp(32px, 7vw, 72px) auto; }
+.a-login { background: #fff; border: 1px solid var(--a-border); border-radius: 14px; padding: 28px; width: min(420px, calc(100% - 32px)); display: grid; gap: 16px; justify-items: stretch; }
 .a-login img { margin: 0 auto; }
 .a-login h1 { text-align: center; font-size: 1.3rem; }

@@ -2,6 +2,23 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-24 (late) — Owner's layout changes (decision D-015)
+
+### Changed
+- **The breadcrumb trail ("Home / Services / Car Recovery") is gone from every page.** The
+  BreadcrumbList JSON-LD stays exactly as it was — that is what Google reads for breadcrumb rich
+  results — so nothing is lost in search.
+- **Service and area heroes now use the page's own photo as the hero background**, given the same
+  treatment as the home page: the complete photo full width on phones, and a right-hand layer
+  dissolving into the copy panel from 900px up. The photo is no longer a card beside the text.
+  It is preloaded (`$seo->preloadImage`), because a CSS background is discovered only after the
+  stylesheet parses and would otherwise delay the largest paint.
+- **The site header and footer now wrap the admin**, on the sign-in page and on every dashboard
+  screen, so the admin sits inside the same brand as the website.
+
+### Removed
+- `resources/partials/breadcrumbs.php` and its CSS — nothing rendered it any more.
+
 ## 2026-09-24 (night) — Live on dubaitowingexperts.com
 
 The site is deployed and running on Hostinger. Document root is a symlink to `public/`, so no PHP

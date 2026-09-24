@@ -34,10 +34,18 @@ $error = Session::getFlash('error');
 <meta name="robots" content="noindex,nofollow">
 <title><?= e($title ?? 'Admin') ?> · Admin · <?= e(business('name')) ?></title>
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<?php // The site header and footer are shown around the admin too, so site.css loads first and
+      // admin.css after it — admin rules then win wherever the two touch the same element. ?>
+<link rel="stylesheet" href="<?= e(asset('css/fonts.css')) ?>">
+<link rel="stylesheet" href="<?= e(asset('css/site.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('css/admin.css')) ?>">
 </head>
-<body>
+<body class="a-body">
+<?= partial('icons') ?>
 <a class="skip-link" href="#main">Skip to content</a>
+<?= partial('topbar') ?>
+<?= partial('header') ?>
 <div class="a-shell">
     <aside class="a-side">
         <a class="a-brand" href="/admin/"><img src="/assets/img/logo-footer.webp" width="760" height="347" alt=""> <span>Admin</span></a>
@@ -64,6 +72,8 @@ $error = Session::getFlash('error');
         <?= $content ?>
     </main>
 </div>
+<?= partial('footer') ?>
+<script src="<?= e(asset('js/app.js')) ?>" defer nonce="<?= e(csp_nonce()) ?>"></script>
 <script src="<?= e(asset('js/admin.js')) ?>" defer nonce="<?= e(csp_nonce()) ?>"></script>
 </body>
 </html>

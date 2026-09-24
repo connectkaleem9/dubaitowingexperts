@@ -40,8 +40,10 @@ final class ServiceController extends Controller
         )->type('service')->crumbs('Services', '/services/')->crumbs($service['name'], $path);
         $seo->addSchema(Schema::service($service, $path, $areas));
         $image = Media::find($service['image_id'] ? (int) $service['image_id'] : null);
-        if ($image && $seo->ogImage === null) {
-            $seo->ogImage = media_url($image, 1600);
+        if ($image) {
+            $seo->ogImage ??= media_url($image, 1600);
+            // The hero shows it as a CSS background, so preload it as the LCP candidate.
+            $seo->preloadImage = media_url($image);
         }
 
         $related = array_values(array_filter(Service::published(), static fn (array $s): bool => $s['id'] !== $service['id']));

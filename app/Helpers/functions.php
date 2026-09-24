@@ -254,3 +254,23 @@ function media_url(?array $media, int $width = 1600): ?string
     $pick = max(array_filter($widths, static fn (int $w): bool => $w <= $width) ?: [min($widths)]);
     return url('/uploads/' . $media['path'] . '-' . $pick . '.webp');
 }
+
+/**
+ * Turns a media record into the custom properties the `.hero--bg` hero background reads:
+ * the image itself and its aspect ratio, which sets the image's height on phones.
+ * Returns '' when there is no image, so the caller falls back to the plain gradient hero.
+ */
+function hero_bg_style(?array $media): string
+{
+    $url = media_url($media);
+    if ($url === null) {
+        return '';
+    }
+    // Root-relative, so the background never depends on APP_URL matching the host being browsed.
+    $url = (string) parse_url($url, PHP_URL_PATH);
+    // Quotes and parentheses would end the CSS url() early; generated filenames never contain them.
+    $url = str_replace(["'", '"', '(', ')', '\\'], '', $url);
+    $ratio = round(((int) $media['height'] / max(1, (int) $media['width'])) * 100, 3);
+
+    return ' style="--hero-img:url(\'' . e($url) . '\');--hero-ratio:' . $ratio . '%"';
+}

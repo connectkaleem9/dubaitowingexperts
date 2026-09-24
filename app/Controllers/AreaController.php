@@ -42,8 +42,10 @@ final class AreaController extends Controller
             $area['excerpt']
         )->type('area')->crumbs('Areas', '/areas/')->crumbs($area['name'], $path);
         $image = Media::find($area['image_id'] ? (int) $area['image_id'] : null);
-        if ($image && $seo->ogImage === null) {
-            $seo->ogImage = media_url($image, 1600);
+        if ($image) {
+            $seo->ogImage ??= media_url($image, 1600);
+            // The hero shows it as a CSS background, so preload it as the LCP candidate.
+            $seo->preloadImage = media_url($image);
         }
 
         $services = Service::forArea((int) $area['id']) ?: Service::published();

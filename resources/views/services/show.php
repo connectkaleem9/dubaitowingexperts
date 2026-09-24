@@ -5,8 +5,9 @@
  */
 $wa = $service['whatsapp_message'] ?: null;
 ?>
-<section class="hero hero--compact">
-    <div class="container hero__grid<?= $image ? ' hero__grid--media' : '' ?>">
+<?php // The service photo is the hero's background (see .hero--bg in site.css), not a card beside the copy. ?>
+<section class="hero hero--compact<?= $image ? ' hero--bg' : '' ?>"<?= hero_bg_style($image) ?>>
+    <div class="container hero__grid">
         <div>
             <h1><?= e($service['h1']) ?></h1>
             <?php if ($service['intro']): ?><p class="hero__lead"><?= e($service['intro']) ?></p><?php endif; ?>
@@ -16,9 +17,6 @@ $wa = $service['whatsapp_message'] ?: null;
             </div>
             <p class="hero__phone">Or call <a href="<?= e(tel_href()) ?>" data-track="phone_click" data-location="hero_number"><?= e(business('phone_display')) ?></a></p>
         </div>
-        <?php if ($image): ?>
-            <div class="hero__media"><?= media_img($image, '(min-width: 1024px) 520px, 100vw', ['loading' => 'eager', 'fetchpriority' => 'high']) ?></div>
-        <?php endif; ?>
     </div>
 </section>
 

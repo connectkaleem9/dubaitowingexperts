@@ -23,6 +23,12 @@ final class Seo
     public string $pageType = 'page';
     public ?string $publishedTime = null;
     public ?string $modifiedTime = null;
+    /**
+     * LCP image to preload. A hero shown as a CSS background is only discovered once the
+     * stylesheet has parsed, which delays the largest paint; preloading restores the head start
+     * an <img fetchpriority="high"> would have had.
+     */
+    public ?string $preloadImage = null;
 
     private function __construct(
         public string $path,

@@ -5,8 +5,9 @@
  */
 $wa = $area['whatsapp_message'] ?: 'Hello Dubai Towing Experts, I need recovery in ' . $area['name'] . '. My location is: ';
 ?>
-<section class="hero hero--compact">
-    <div class="container hero__grid<?= $image ? ' hero__grid--media' : '' ?>">
+<?php // The area photo is the hero's background (see .hero--bg in site.css), not a card beside the copy. ?>
+<section class="hero hero--compact<?= $image ? ' hero--bg' : '' ?>"<?= hero_bg_style($image) ?>>
+    <div class="container hero__grid">
         <div>
             <p class="eyebrow"><?= icon('pin') ?><?= e($area['name']) ?>, Dubai</p>
             <h1><?= e($area['h1']) ?></h1>
@@ -17,9 +18,6 @@ $wa = $area['whatsapp_message'] ?: 'Hello Dubai Towing Experts, I need recovery 
                 <button type="button" class="btn btn--ghost btn--lg" data-share-location data-wa="<?= e(whatsapp_href($wa)) ?>"><?= icon('pin') ?>Send my location</button>
             </div>
         </div>
-        <?php if ($image): ?>
-            <div class="hero__media"><?= media_img($image, '(min-width: 1024px) 520px, 100vw', ['loading' => 'eager', 'fetchpriority' => 'high']) ?></div>
-        <?php endif; ?>
     </div>
 </section>
 

@@ -35,6 +35,9 @@ $robots = config('app.force_noindex') ? 'noindex,nofollow' : $seo->robots;
 <link rel="alternate icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<?php if ($seo->preloadImage): ?>
+<link rel="preload" href="<?= e($seo->preloadImage) ?>" as="image" fetchpriority="high">
+<?php endif; ?>
 <link rel="stylesheet" href="<?= e(asset('css/fonts.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('css/site.css')) ?>">
 <script nonce="<?= e(csp_nonce()) ?>">document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>

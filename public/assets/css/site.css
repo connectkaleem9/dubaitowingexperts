@@ -270,6 +270,40 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .hero--inner, .hero--compact { padding: var(--s-6) 0 var(--s-7); }
 .hero--inner h1, .hero--compact h1 { max-width: 24ch; }
 .hero__media img { border-radius: var(--r-lg); box-shadow: var(--sh-2); }
+/*
+ * Inner pages (service, area): the page's own photo becomes the hero background, treated exactly
+ * like the home page — complete and full width on phones, a right-hand layer dissolving into the
+ * copy panel from 900px up. The image URL and its aspect ratio are set on the section as
+ * --hero-img and --hero-ratio, because both come from the media record.
+ * Declared after .hero--compact so the phone padding below wins over its shorthand.
+ */
+.hero--bg { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
+@media (max-width: 899px) {
+    .hero--bg {
+        background-color: #FDF3EC;
+        background-image: var(--hero-img);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: top center;
+        /* A percentage padding resolves against the width, so this is exactly the image's height. */
+        padding-top: calc(var(--hero-ratio, 60%) + var(--s-6));
+    }
+}
+@media (min-width: 900px) {
+    .hero--bg { min-height: 460px; display: grid; align-items: center; }
+    .hero--bg::before {
+        content: ""; position: absolute; inset: 0 0 0 44%; z-index: 0; pointer-events: none;
+        background: var(--hero-img) center right / cover no-repeat;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.5) 12%, #000 30%);
+        mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.5) 12%, #000 30%);
+    }
+    .hero--bg .hero__lead, .hero--bg .trust-list { max-width: 430px; }
+}
+@media (min-width: 1280px) {
+    .hero--bg { min-height: 520px; }
+    .hero--bg::before { inset: 0 0 0 47%; }
+    .hero--bg .hero__lead, .hero--bg .trust-list { max-width: 500px; }
+}
 .hero__phone { margin-top: var(--s-4); color: var(--c-muted); font-size: .92rem; }
 .hero__phone a { font-weight: 700; color: var(--c-heading); text-decoration: none; }
 .hero__phone a:hover { color: var(--c-red); }
@@ -627,13 +661,7 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .alert--error { background: var(--c-error-bg); border-color: #FECDCA; color: var(--c-error); }
 .alert--info { background: var(--c-red-50); border-color: #FECDCA; color: var(--c-heading); }
 
-/* ---------- Breadcrumbs, pagination, project page ---------- */
-.breadcrumbs { background: var(--c-surface-2); font-size: var(--fs-small); }
-.breadcrumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 11px 0; }
-.breadcrumbs li:not(:last-child)::after { content: "/"; margin-left: 6px; color: var(--c-muted); }
-.breadcrumbs a { color: var(--c-muted); text-decoration: none; }
-.breadcrumbs a:hover { color: var(--c-red); }
-.breadcrumbs [aria-current] { color: var(--c-heading); font-weight: 600; }
+/* ---------- Pagination, project page ---------- */
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s-3); margin: 0 0 var(--s-6); padding: 0; }
 .facts div { background: var(--c-surface); border-radius: var(--r-sm); padding: var(--s-4); }
 .facts dt { font-size: var(--fs-small); color: var(--c-muted); }

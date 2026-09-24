@@ -15,10 +15,9 @@ $waMessage = $waMessage ?? null;
 <a class="skip-link" href="#main">Skip to content</a>
 <?= partial('topbar') ?>
 <?= partial('header', ['waMessage' => $waMessage]) ?>
+<?php // The breadcrumb trail is not shown (owner's decision, D-015); $seo->breadcrumbs still feeds
+      // the BreadcrumbList JSON-LD, which is what Google uses for breadcrumb rich results. ?>
 <main id="main" tabindex="-1">
-<?php if ($seo->path !== '/' && $seo->breadcrumbs !== []): ?>
-<?= partial('breadcrumbs', ['seo' => $seo]) ?>
-<?php endif; ?>
 <?= $content ?>
 </main>
 <?= partial('footer') ?>
