@@ -98,7 +98,11 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .topbar__item { display: inline-flex; align-items: center; gap: 7px; }
 .topbar .icon { width: 15px; height: 15px; color: var(--c-red); }
 .topbar__spacer { margin-left: auto; }
-@media (max-width: 767px) { .topbar__item:nth-child(n+3) { display: none; } }
+@media (max-width: 767px) {
+    .topbar__item:nth-child(n+3) { display: none; }
+    /* Two items left, so centre them rather than leaving them hanging on the left. */
+    .topbar__inner { flex-direction: column; align-items: center; gap: 4px; }
+}
 
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 1px 0 var(--c-border); }
@@ -199,20 +203,30 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
  * the section look unfinished, not the split itself.
  *
  * The band's height is the photo's own aspect ratio at full width (1920x800, so 41.667vw), which is
- * why nothing is cropped. .hero--bg (service and area pages) does the same from its --hero-img,
- * with the ratio passed in as --hero-ratio because those photos are not all the same shape.
+ * why nothing is cropped. Its bottom edge dissolves into the navy instead of stopping at a hard
+ * line, so the photo belongs to the section rather than sitting above it. .hero--bg (service and
+ * area pages) does the same from its --hero-img, with the band height passed in as --hero-band
+ * because those photos are not all the same shape.
  */
 @media (max-width: 899px) {
-    .hero--photo, .hero--bg {
+    /* .hero.hero--photo, not .hero--photo: the .hero--compact padding shorthand is declared later
+       in the file, and at equal specificity it would win and drop the room left for the photo. */
+    .hero.hero--photo, .hero.hero--bg {
         background-color: var(--c-navy-900);
         background-repeat: no-repeat;
         background-size: 100% auto;
         background-position: top center;
-        padding: var(--s-6) 0 var(--s-7);
+        /* The band is the photo at full width, so the copy starts just below it. */
+        padding: calc(var(--hero-band) + var(--s-5)) 0 var(--s-7);
+        /* Clear over the top two thirds of the photo, then down into the navy by its bottom edge. */
+        --hero-fade: linear-gradient(180deg,
+            rgba(1, 27, 48, 0) 0,
+            rgba(1, 27, 48, 0) calc(var(--hero-band) * .55),
+            rgba(1, 27, 48, .55) calc(var(--hero-band) * .82),
+            var(--c-navy-900) var(--hero-band));
     }
-    /* The photo's full-width height, so the band shows all of it and the copy starts below. */
-    .hero--photo { background-image: url('/assets/img/hero-bg.webp'); padding-top: calc(41.667vw + var(--s-6)); }
-    .hero--bg { background-image: var(--hero-img); padding-top: calc(var(--hero-ratio, 60%) + var(--s-6)); }
+    .hero--photo { --hero-band: 41.667vw; background-image: var(--hero-fade), url('/assets/img/hero-bg.webp'); }
+    .hero--bg { background-image: var(--hero-fade), var(--hero-img); }
     .hero--photo h1, .hero--bg h1,
     .hero--photo .eyebrow, .hero--bg .eyebrow { color: #fff; }
     .hero--photo h1 .accent, .hero--bg h1 .accent { color: var(--c-red-on-dark); }
@@ -295,14 +309,19 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .hero__media img { border-radius: var(--r-lg); box-shadow: var(--sh-2); }
 /*
  * Inner pages (service, area): the page's own photo becomes the hero background, treated exactly
- * like the home page — complete and full width on phones, a right-hand layer dissolving into the
- * copy panel from 900px up. The image URL and its aspect ratio are set on the section as
- * --hero-img and --hero-ratio, because both come from the media record.
- * Declared after .hero--compact so the phone padding below wins over its shorthand.
+ * like the home page — the whole photo as a band on phones, a right-hand layer dissolving into the
+ * copy panel from 900px up. The image URL and the band's height are set on the section as
+ * --hero-img and --hero-band, because both come from the media record.
+ * Declared after .hero--compact so the phone padding wins over its shorthand.
+ *
+ * The light panel belongs to the desktop layout only. As a plain rule it sat later in the file
+ * than the phone block above and its `background` shorthand quietly reset the photo there.
  */
-.hero--bg { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
 @media (min-width: 900px) {
-    .hero--bg { min-height: 460px; display: grid; align-items: center; }
+    .hero--bg {
+        min-height: 460px; display: grid; align-items: center;
+        background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%);
+    }
     .hero--bg::before {
         content: ""; position: absolute; inset: 0 0 0 44%; z-index: 0; pointer-events: none;
         background: var(--hero-img) center right / cover no-repeat;
@@ -454,11 +473,18 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .marquee { position: relative; overflow: hidden; padding: 4px 0 10px; }
 .marquee.is-paused .marquee__track { animation-play-state: paused; }
 /* Pause/play control — WCAG 2.2.2 requires a way to stop content that moves on its own */
+/*
+ * The pause control is kept but taken out of the visual design: it sits off-screen and appears
+ * the moment it is focused. WCAG 2.2.2 wants a way to stop content that moves on its own, and
+ * hover/focus pausing alone does not help a keyboard or touch user.
+ */
 .marquee-toggle {
+    position: absolute; left: -10000px; top: auto; z-index: 3;
     display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px;
     background: #fff; border: 1.5px solid var(--c-border); border-radius: var(--r-pill);
     font: inherit; font-size: .85rem; font-weight: 600; color: var(--c-heading); cursor: pointer;
 }
+.marquee-toggle:focus-visible { left: 8px; bottom: 8px; }
 .marquee-toggle:hover { border-color: var(--c-red); color: var(--c-red); }
 .marquee-toggle .icon { width: 16px; height: 16px; }
 /* Keep the control above the edge-fade overlays */

@@ -2,6 +2,27 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-25 (later) — Hero photo blends in, reviews published
+
+### Changed
+- **The hero photo's bottom edge now dissolves into the navy** instead of stopping at a hard line,
+  on the home page and on service and area pages, so the picture belongs to the section rather than
+  sitting above it.
+- **The top bar is centred on phones**, where only two items are shown.
+- **The Pause control is no longer part of the visual design.** It is still there and still works —
+  it sits off-screen and appears as soon as it is focused, the way the skip link does. WCAG 2.2.2
+  wants a way to stop content that moves on its own, and pausing on hover does nothing for someone
+  on a phone or using a keyboard.
+
+### Added
+- The owner's five reviews are **approved and live**, on the home page carousel and `/reviews/`.
+
+### Fixed
+- **Service and area heroes had lost their photo on phones.** Two later rules were quietly winning:
+  `.hero--bg`'s light desktop panel (a `background` shorthand, which resets the image) and
+  `.hero--compact`'s padding shorthand (which removed the room the photo band needs). The panel is
+  now scoped to 900px and up, and the phone rule carries enough specificity to hold its padding.
+
 ## 2026-09-25 — Mobile hero to the owner's reference, form alignment, first reviews
 
 ### Changed
