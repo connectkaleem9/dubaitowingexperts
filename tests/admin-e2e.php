@@ -87,7 +87,11 @@ $login = req('GET', $base . '/admin/login/');
 $r = req('POST', $base . '/admin/login/', ['_token' => token($login['body']), 'email' => $adminEmail, 'password' => $adminPassword]);
 check('owner can sign in', $r['status'] === 302 && $r['location'] === '/admin/', 'status ' . $r['status'] . ' -> ' . $r['location']);
 
-$dash = req('GET', $base . '/admin/');
+// Signing in lands on Projects; the dashboard moved to its own path when the menu was trimmed.
+$landing = req('GET', $base . '/admin/');
+check('admin home goes to projects', $landing['status'] === 302 && $landing['location'] === '/admin/projects/',
+    'status ' . $landing['status'] . ' -> ' . $landing['location']);
+$dash = req('GET', $base . '/admin/dashboard/');
 check('dashboard loads', $dash['status'] === 200 && str_contains($dash['body'], 'New inquiries'), 'status ' . $dash['status']);
 
 $form = req('GET', $base . '/admin/projects/new/');
@@ -98,16 +102,17 @@ $create = req('POST', $base . '/admin/projects/new/', [
     'slug' => $slug,
     'service_id' => (string) Database::value("SELECT id FROM services WHERE slug = 'car-recovery'"),
     'area_id' => (string) Database::value("SELECT id FROM areas WHERE slug = 'dubai-marina'"),
-    'location_text' => '', 'vehicle_type' => 'Sedan', 'project_date' => date('Y-m-d'),
-    'excerpt' => 'A sedan that would not start was recovered from a tower basement in Dubai Marina.',
-    'body' => "<h2>The job</h2><p>The car would not start in a basement car park with a low ceiling, so it was moved out before being loaded.</p>",
+    'project_date' => date('Y-m-d'),
     'status' => 'published',
-], ['featured' => $tmpImage]);
+], ['after' => $tmpImage]);
 check('project created with an uploaded image', $create['status'] === 302, 'status ' . $create['status']);
 
 $project = Database::one('SELECT * FROM projects WHERE slug = :s', ['s' => $slug]);
 check('project stored as published', $project !== null && $project['status'] === 'published');
-check('featured image linked and converted to WebP', $project !== null && $project['featured_image_id'] !== null
+// There is no featured-image field any more: the card photo follows the "after" shot.
+check('after photo becomes the card image and is converted to WebP',
+    $project !== null && $project['after_image_id'] !== null
+    && (int) $project['featured_image_id'] === (int) $project['after_image_id']
     && (string) Database::value('SELECT mime FROM media WHERE id = :i', ['i' => (int) $project['featured_image_id']]) === 'image/webp');
 
 $media = Database::one('SELECT * FROM media WHERE id = :i', ['i' => (int) ($project['featured_image_id'] ?? 0)]);
@@ -122,7 +127,9 @@ check('resized image files written to disk', $variantsExist);
 $public = req('GET', $base . '/projects/' . $slug . '/');
 check('published project is live on the website', $public['status'] === 200 && str_contains($public['body'], 'Sedan recovered'), 'status ' . $public['status']);
 check('project image served responsively', str_contains($public['body'], 'srcset='));
-check('project appears in the sitemap', str_contains(req('GET', $base . '/sitemap.xml')['body'], '/projects/' . $slug . '/'));
+// A project with no description is a thin page: noindex, and kept out of the sitemap.
+check('project without a description is noindex', str_contains($public['body'], 'name="robots" content="noindex,follow"'));
+check('thin project stays out of the sitemap', !str_contains(req('GET', $base . '/sitemap.xml')['body'], '/projects/' . $slug . '/'));
 
 $list = req('GET', $base . '/admin/projects/');
 $unpub = req('POST', $base . '/admin/projects/' . (int) $project['id'] . '/status/', ['_token' => token($list['body'])]);

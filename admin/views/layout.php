@@ -2,25 +2,15 @@
 /** @var string $content @var array $admin @var string $title */
 use App\Core\Session;
 
-$isOwner = ($admin['role'] ?? '') === 'owner';
+/*
+ * The owner asked for Projects and Reviews only (2026-09-25). The other modules still work and
+ * keep their routes — they are simply not in the menu. Security stays reachable from the footer
+ * below, because that is where the password is changed.
+ */
 $menu = [
-    ['/admin/', 'Dashboard'],
-    ['/admin/leads/', 'Contact Requests'],
     ['/admin/projects/', 'Projects'],
     ['/admin/reviews/', 'Reviews'],
-    ['/admin/services/', 'Services'],
-    ['/admin/areas/', 'Areas'],
-    ['/admin/faqs/', 'FAQs'],
-    ['/admin/posts/', 'Blog'],
-    ['/admin/media/', 'Media'],
-    ['/admin/seo/', 'SEO'],
 ];
-if ($isOwner) {
-    $menu[] = ['/admin/settings/', 'Site Settings'];
-    $menu[] = ['/admin/users/', 'Admin Users'];
-    $menu[] = ['/admin/activity/', 'Activity Logs'];
-}
-$menu[] = ['/admin/security/', 'Security'];
 $path = current_path();
 $success = Session::getFlash('success');
 $error = Session::getFlash('error');
@@ -58,6 +48,7 @@ $error = Session::getFlash('error');
         </nav>
         <div class="a-side__foot">
             <span><?= e($admin['name'] ?? '') ?> · <?= e($admin['role'] ?? '') ?></span>
+            <a href="/admin/security/">Change password</a>
             <a href="/" target="_blank" rel="noopener">View website ↗</a>
             <?= a_post_button('/admin/logout/', 'Sign out', 'a-link') ?>
         </div>

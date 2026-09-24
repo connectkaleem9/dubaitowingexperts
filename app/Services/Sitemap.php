@@ -49,7 +49,10 @@ final class Sitemap
         $sources = [
             ['SELECT slug, updated_at FROM services WHERE is_published = 1', '/services/%s/', '0.9'],
             ['SELECT slug, updated_at FROM areas WHERE is_published = 1', '/areas/%s/', '0.7'],
-            ["SELECT slug, updated_at FROM projects WHERE status = 'published'", '/projects/%s/', '0.5'],
+            // Only projects that carry a description: the rest are noindex, so listing them here
+            // would advertise URLs we are asking Google not to index.
+            ["SELECT slug, updated_at FROM projects WHERE status = 'published'"
+                . " AND (COALESCE(excerpt, '') <> '' OR COALESCE(body, '') <> '')", '/projects/%s/', '0.5'],
             ["SELECT slug, updated_at FROM posts WHERE status = 'published' AND published_at <= NOW()", '/blog/%s/', '0.5'],
         ];
         foreach ($sources as [$sql, $pattern, $priority]) {

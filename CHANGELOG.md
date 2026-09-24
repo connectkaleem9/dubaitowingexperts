@@ -2,6 +2,29 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-25 (evening) — Admin cut down to Projects and Reviews
+
+### Changed
+- **The admin menu is Projects and Reviews only.** Signing in lands on Projects. The other modules
+  keep working on their own URLs; they are simply not in the menu. *Change password* sits in the
+  sidebar footer, because losing that would lock the owner out of their own account.
+- **The add/edit project form is title, service, area, date, status and two photos.** The URL slug
+  is made from the title, and the card photo follows the "after" shot, so removing the featured
+  field changed nothing on the website.
+- **The "…or choose from media library" picker is gone** from every image field; images are
+  uploaded. The library itself is unchanged and still holds everything.
+- Admin sign-in email changed to `info.dubairecoveryexperts@gmail.com`.
+
+### Removed
+- The project gallery: with its form section gone, its routes, controller actions and the two model
+  writers behind them were unreachable. Galleries already saved still show on the project page.
+
+### Notes
+- A project with no description is a thin page, so **project pages are now `noindex,follow` unless
+  they carry text**, and those URLs are left out of the sitemap (CLAUDE.md §6). The listing at
+  `/projects/`, the home page slider and the cards are unaffected — that is where the photos earn
+  their keep. Add a description to a project in the database and its page becomes indexable again.
+
 ## 2026-09-25 (later) — Hero photo blends in, reviews published
 
 ### Changed

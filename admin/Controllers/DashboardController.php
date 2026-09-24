@@ -11,6 +11,12 @@ use App\Models\Review;
 
 final class DashboardController extends AdminController
 {
+    /** Signing in lands on Projects, the first item in the trimmed menu. */
+    public function home(Request $request): void
+    {
+        redirect('/admin/projects/');
+    }
+
     public function index(Request $request): void
     {
         $leads = Lead::countByStatus();

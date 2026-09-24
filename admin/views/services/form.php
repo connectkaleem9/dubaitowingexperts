@@ -1,5 +1,5 @@
 <?php
-/** @var array|null $service @var array $icons @var array|null $image @var list<array> $library @var list<array> $areas @var list<int> $linkedAreas */
+/** @var array|null $service @var array $icons @var array|null $image @var list<array> $areas @var list<int> $linkedAreas */
 $s = $service ?? [];
 $action = $service ? '/admin/services/' . (int) $service['id'] . '/' : '/admin/services/new/';
 ?>
@@ -18,7 +18,7 @@ $action = $service ? '/admin/services/' . (int) $service['id'] . '/' : '/admin/s
         <?= af_input('whatsapp_message', 'WhatsApp pre-filled message', $s['whatsapp_message'] ?? '', ['maxlength' => 300], 'e.g. "Hello Dubai Towing Experts, I need car recovery. My location is: "') ?>
         <?= af_input('sort_order', 'Sort order', $s['sort_order'] ?? 0, ['type' => 'number']) ?>
     </div>
-    <?= af_image('image', 'Service image', $image, $library, 'Shown next to the heading and used for social sharing.') ?>
+    <?= af_image('image', 'Service image', $image, 'Shown next to the heading and used for social sharing.') ?>
 
     <fieldset class="a-fieldset">
         <legend>Areas that list this service</legend>

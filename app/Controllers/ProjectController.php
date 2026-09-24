@@ -44,10 +44,15 @@ final class ProjectController extends Controller
         $path = '/projects/' . $project['slug'] . '/';
         $featured = Media::find($project['featured_image_id'] ? (int) $project['featured_image_id'] : null);
 
+        // The admin form has no description field any more (owner's request, 2026-09-25), so a
+        // project page can be title + photos alone. That is a thin page, and thin pages are kept
+        // out of the index (CLAUDE.md §6). Add text to a project and it becomes indexable again.
+        $description = $project['excerpt'] !== '' ? $project['excerpt'] : str_limit((string) $project['body'], 155);
         $seo = Seo::page(
             $path,
             Seo::withBrand((string) $project['title']),
-            $project['excerpt'] !== '' ? $project['excerpt'] : str_limit((string) $project['body'], 155)
+            $description,
+            $description === '' ? 'noindex,follow' : 'index,follow'
         )->type('project')->crumbs('Projects', '/projects/')->crumbs($project['title'], $path);
         $seo->ogType = 'article';
         if ($featured && $seo->ogImage === null) {

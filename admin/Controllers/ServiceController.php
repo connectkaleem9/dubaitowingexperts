@@ -42,7 +42,6 @@ final class ServiceController extends AdminController
             'service' => $service,
             'icons' => self::ICONS,
             'image' => $service ? Media::find($service['image_id']) : null,
-            'library' => Media::paginate(1, 200)['items'],
             'areas' => Area::all(),
             'linkedAreas' => $service ? Service::areaIds((int) $service['id']) : [],
         ]);

@@ -1,5 +1,5 @@
 <?php
-/** @var array|null $post @var array|null $image @var list<array> $library */
+/** @var array|null $post @var array|null $image */
 $p = $post ?? [];
 $action = $post ? '/admin/posts/' . (int) $post['id'] . '/' : '/admin/posts/new/';
 ?>
@@ -15,7 +15,7 @@ $action = $post ? '/admin/posts/' . (int) $post['id'] . '/' : '/admin/posts/new/
         <?= af_select('status', 'Status', $p['status'] ?? 'draft', ['draft' => 'Draft', 'published' => 'Published']) ?>
         <?= af_input('published_at', 'Publish date/time', isset($p['published_at']) && $p['published_at'] ? substr((string) $p['published_at'], 0, 16) : '', ['type' => 'datetime-local'], 'Leave blank to publish now.') ?>
     </div>
-    <?= af_image('image', 'Featured image', $image, $library) ?>
+    <?= af_image('image', 'Featured image', $image) ?>
     <div class="a-form__actions">
         <button class="a-btn a-btn--primary" type="submit">Save guide</button>
         <a class="a-btn" href="/admin/posts/">Cancel</a>

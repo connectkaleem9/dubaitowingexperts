@@ -10,8 +10,6 @@ use App\Models\Area;
 use App\Models\Media;
 use App\Models\Project;
 use App\Models\Service;
-use App\Services\HtmlSanitizer;
-use App\Services\Uploader;
 use App\Validation\Validator;
 
 final class ProjectController extends AdminController
@@ -46,7 +44,6 @@ final class ProjectController extends AdminController
 
     private function form(?array $project): void
     {
-        $library = Media::paginate(1, 200)['items'];
         $this->view('projects/form', [
             'title' => $project ? 'Edit project' : 'Add project',
             'actions' => $project && $project['status'] === 'published'
@@ -54,11 +51,8 @@ final class ProjectController extends AdminController
             'project' => $project,
             'services' => array_column(Service::all(), 'name', 'id'),
             'areas' => array_column(Area::all(), 'name', 'id'),
-            'featured' => $project ? Media::find($project['featured_image_id']) : null,
             'before' => $project ? Media::find($project['before_image_id']) : null,
             'after' => $project ? Media::find($project['after_image_id']) : null,
-            'gallery' => $project ? Project::gallery((int) $project['id']) : [],
-            'library' => $library,
         ]);
     }
 
@@ -105,37 +99,6 @@ final class ProjectController extends AdminController
         $this->success('Project deleted. Its images remain in the media library.', '/admin/projects/');
     }
 
-    public function addGallery(Request $request): void
-    {
-        $id = $this->id($request);
-        $project = Project::find($id) ?? abort(404);
-        $errors = [];
-        $added = 0;
-        foreach (array_slice($request->files('gallery'), 0, 20) as $i => $file) {
-            try {
-                $mediaId = Uploader::image($file, $project['title'] . ' – photo ' . ($i + 1), Auth::id());
-                Project::addImage($id, $mediaId);
-                $added++;
-            } catch (\RuntimeException $e) {
-                $errors[] = $file['name'] . ': ' . $e->getMessage();
-            }
-        }
-        $this->log($request, 'project_gallery_added', 'project', $id, $added . ' image(s)');
-        if ($errors !== []) {
-            $this->error("Added {$added} image(s). Problems: " . implode(' ', $errors), '/admin/projects/' . $id . '/#gallery');
-        }
-        $this->success("Added {$added} image(s). Edit alt text in the media library if needed.", '/admin/projects/' . $id . '/#gallery');
-    }
-
-    public function removeGallery(Request $request): void
-    {
-        $id = $this->id($request);
-        Project::find($id) ?? abort(404);
-        Project::removeImage($id, $this->id($request, 'linkid'));
-        $this->log($request, 'project_gallery_removed', 'project', $id);
-        $this->success('Image removed from gallery.', '/admin/projects/' . $id . '/#gallery');
-    }
-
     /** @return array<string, mixed> */
     private function validated(Request $request, ?array $project, string $back): array
     {
@@ -147,11 +110,7 @@ final class ProjectController extends AdminController
             'slug' => 'required|slug|max:160',
             'service_id' => 'nullable|int',
             'area_id' => 'nullable|int',
-            'location_text' => 'nullable|max:160',
-            'vehicle_type' => 'nullable|max:100',
             'project_date' => 'nullable|date',
-            'excerpt' => 'nullable|max:300',
-            'body' => 'nullable|max:60000',
             'status' => 'required|in:draft,published',
         ]);
         $errors = $v->errors();
@@ -166,9 +125,6 @@ final class ProjectController extends AdminController
         if ($areaId !== null && Area::find($areaId) === null) {
             $errors['area_id'] = 'Choose a valid area.';
         }
-        if ($request->input('status') === 'published' && trim(strip_tags($request->input('body'))) === '' && $request->input('excerpt') === '') {
-            $errors['body'] = 'Add a description before publishing — empty project pages are not useful to visitors or search engines.';
-        }
         if ($errors !== []) {
             $this->invalid($errors, $input, $back);
         }
@@ -178,11 +134,7 @@ final class ProjectController extends AdminController
             'slug' => $slug,
             'service_id' => $serviceId,
             'area_id' => $areaId,
-            'location_text' => $request->input('location_text') ?: null,
-            'vehicle_type' => $request->input('vehicle_type') ?: null,
             'project_date' => $request->input('project_date') ?: null,
-            'excerpt' => $request->input('excerpt'),
-            'body' => HtmlSanitizer::clean($request->input('body')),
             'status' => $status,
             'published_at' => $status === 'published' ? ($project['published_at'] ?? date('Y-m-d H:i:s')) : ($project['published_at'] ?? null),
         ];
@@ -193,13 +145,16 @@ final class ProjectController extends AdminController
         $title = $request->input('title');
         $errors = [];
         $updates = [];
-        foreach (['featured_image_id' => ['featured', $title], 'before_image_id' => ['before', $title . ' – before'], 'after_image_id' => ['after', $title . ' – after']] as $col => [$field, $alt]) {
+        foreach (['before_image_id' => ['before', $title . ' – before'], 'after_image_id' => ['after', $title . ' – after']] as $col => [$field, $alt]) {
             [$mediaId, $error] = $this->imageField($request, $field, $project ? ($project[$col] ? (int) $project[$col] : null) : null, $alt);
             if ($error !== null) {
-                $errors[] = ucfirst($field) . ' image: ' . $error;
+                $errors[] = ucfirst($field) . ' photo: ' . $error;
             }
             $updates[$col] = $mediaId !== null && Media::find($mediaId) !== null ? $mediaId : null;
         }
+        // Cards and listings show the featured image; there is no field for it any more, so it
+        // follows the "after" shot — the finished job — and falls back to "before".
+        $updates['featured_image_id'] = $updates['after_image_id'] ?? $updates['before_image_id'] ?? null;
         Project::update($id, $updates);
         if ($errors !== []) {
             $this->error('Saved, but: ' . implode(' ', $errors), $back);

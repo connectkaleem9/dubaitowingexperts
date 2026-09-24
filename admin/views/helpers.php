@@ -72,7 +72,8 @@ if (!function_exists('af_error')) {
     }
 
     /** Image field: preview + upload + optional pick-from-library + remove. */
-    function af_image(string $name, string $label, ?array $media, array $library = [], string $hint = ''): string
+    /** Upload only: the media-library picker was removed at the owner's request (2026-09-25). */
+    function af_image(string $name, string $label, ?array $media, string $hint = ''): string
     {
         $html = '<div class="a-field a-image' . (isset(errors()[$name]) ? ' has-error' : '') . '"><span class="a-label">' . e($label) . '</span>';
         if ($media) {
@@ -80,13 +81,6 @@ if (!function_exists('af_error')) {
                 . '<label class="a-inline"><input type="checkbox" name="' . e($name) . '_remove" value="1"> Remove image</label>';
         }
         $html .= '<label class="a-inline" for="f-' . e($name) . '">Upload new</label><input id="f-' . e($name) . '" type="file" name="' . e($name) . '" accept="image/jpeg,image/png,image/webp">';
-        if ($library !== []) {
-            $html .= '<label class="a-inline" for="f-' . e($name) . '-pick">…or choose from media library</label><select id="f-' . e($name) . '-pick" name="' . e($name) . '_media_id"><option value="">—</option>';
-            foreach ($library as $m) {
-                $html .= '<option value="' . (int) $m['id'] . '">#' . (int) $m['id'] . ' ' . e(str_limit($m['alt_text'] ?: (string) $m['original_name'], 60)) . '</option>';
-            }
-            $html .= '</select>';
-        }
         return $html . ($hint !== '' ? '<small>' . e($hint) . '</small>' : '') . af_error($name) . '</div>';
     }
 

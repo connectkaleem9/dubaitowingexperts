@@ -27,7 +27,10 @@ $router->post('/admin/login/', [AuthController::class, 'login']);
 $router->post('/admin/logout/', [AuthController::class, 'logout']);
 
 $router->group([Authenticate::class], static function ($r): void {
-    $r->get('/admin/', [DashboardController::class, 'index']);
+    // The admin is Projects and Reviews only (owner's request, 2026-09-25), so signing in lands
+    // on Projects. The dashboard itself stays at /admin/dashboard/ for the setup warnings.
+    $r->get('/admin/', [DashboardController::class, 'home']);
+    $r->get('/admin/dashboard/', [DashboardController::class, 'index']);
 
     // Projects
     $r->get('/admin/projects/', [ProjectController::class, 'index']);
@@ -37,8 +40,6 @@ $router->group([Authenticate::class], static function ($r): void {
     $r->post('/admin/projects/{id}/', [ProjectController::class, 'update']);
     $r->post('/admin/projects/{id}/status/', [ProjectController::class, 'toggleStatus']);
     $r->post('/admin/projects/{id}/delete/', [ProjectController::class, 'destroy']);
-    $r->post('/admin/projects/{id}/gallery/', [ProjectController::class, 'addGallery']);
-    $r->post('/admin/projects/{id}/gallery/{linkid}/delete/', [ProjectController::class, 'removeGallery']);
 
     // Reviews
     $r->get('/admin/reviews/', [ReviewController::class, 'index']);

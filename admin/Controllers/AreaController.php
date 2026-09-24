@@ -41,7 +41,6 @@ final class AreaController extends AdminController
             'actions' => $area && $area['is_published'] ? '<a class="a-btn" href="/areas/' . e($area['slug']) . '/" target="_blank" rel="noopener">View on site ↗</a>' : '',
             'area' => $area,
             'image' => $area ? Media::find($area['image_id']) : null,
-            'library' => Media::paginate(1, 200)['items'],
             'minWords' => self::MIN_WORDS,
         ]);
     }

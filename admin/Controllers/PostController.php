@@ -39,7 +39,6 @@ final class PostController extends AdminController
             'actions' => $post && $post['status'] === 'published' ? '<a class="a-btn" href="/blog/' . e($post['slug']) . '/" target="_blank" rel="noopener">View on site ↗</a>' : '',
             'post' => $post,
             'image' => $post ? Media::find($post['featured_image_id']) : null,
-            'library' => Media::paginate(1, 200)['items'],
         ]);
     }
 

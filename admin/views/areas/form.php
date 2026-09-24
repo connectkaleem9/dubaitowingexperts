@@ -1,5 +1,5 @@
 <?php
-/** @var array|null $area @var array|null $image @var list<array> $library @var int $minWords */
+/** @var array|null $area @var array|null $image @var int $minWords */
 $a = $area ?? [];
 $action = $area ? '/admin/areas/' . (int) $area['id'] . '/' : '/admin/areas/new/';
 ?>
@@ -16,7 +16,7 @@ $action = $area ? '/admin/areas/' . (int) $area['id'] . '/' : '/admin/areas/new/
     <?= af_textarea('intro', 'Intro paragraph', $a['intro'] ?? '', 3) ?>
     <?= af_textarea('body', 'Page content', $a['body'] ?? '', 18, 'Local roads and highways, parking and basement access, landmarks, typical recovery situations, where cars are usually taken.', true) ?>
     <?= af_input('whatsapp_message', 'WhatsApp pre-filled message', $a['whatsapp_message'] ?? '', ['maxlength' => 300]) ?>
-    <?= af_image('image', 'Area image', $image, $library) ?>
+    <?= af_image('image', 'Area image', $image) ?>
     <?= af_checkbox('is_published', 'Published (visible on the website)', (bool) ($a['is_published'] ?? false)) ?>
     <div class="a-form__actions">
         <button class="a-btn a-btn--primary" type="submit">Save area</button>

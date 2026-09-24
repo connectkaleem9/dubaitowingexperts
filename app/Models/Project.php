@@ -91,20 +91,6 @@ final class Project
         );
     }
 
-    public static function addImage(int $projectId, int $mediaId, string $caption = ''): void
-    {
-        $next = (int) Database::value('SELECT COALESCE(MAX(sort_order), 0) + 1 FROM project_images WHERE project_id = :p', ['p' => $projectId]);
-        Database::run(
-            'INSERT IGNORE INTO project_images (project_id, media_id, caption, sort_order) VALUES (:p, :m, :c, :o)',
-            ['p' => $projectId, 'm' => $mediaId, 'c' => $caption, 'o' => $next]
-        );
-    }
-
-    public static function removeImage(int $projectId, int $linkId): void
-    {
-        Database::run('DELETE FROM project_images WHERE id = :id AND project_id = :p', ['id' => $linkId, 'p' => $projectId]);
-    }
-
     public static function slugExists(string $slug, int $exceptId = 0): bool
     {
         return (bool) Database::value('SELECT 1 FROM projects WHERE slug = :s AND id <> :id', ['s' => $slug, 'id' => $exceptId]);

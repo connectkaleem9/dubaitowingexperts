@@ -35,6 +35,7 @@ final class SeoController extends AdminController
             'title' => 'SEO',
             'overrides' => SeoMeta::all(),
             'paths' => array_values(array_unique($paths)),
+            // Still used here: the social sharing image is picked from the library, not uploaded.
             'library' => Media::paginate(1, 200)['items'],
             'sitemapCount' => count(Sitemap::entries()),
         ]);
