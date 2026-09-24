@@ -23,6 +23,13 @@ DirectoryIndex index.php
 
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
+
+    # Hosts such as Hostinger's LiteSpeed replace the CSP header PHP sends with their own
+    # "upgrade-insecure-requests". A .htaccess header is applied last, so it wins the value back.
+    # It can only be a fixed string (no per-request nonce), so it carries the one directive a
+    # <meta> tag cannot express; the nonce-based policy itself is in the page head.
+    # See App\Middleware\SecurityHeaders.
+    Header always set Content-Security-Policy "frame-ancestors 'self'; upgrade-insecure-requests"
     <FilesMatch "\.(css|js|svg|webp|png|jpg|jpeg|ico|woff2)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>

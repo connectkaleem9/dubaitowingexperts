@@ -29,6 +29,7 @@ $error = Session::getFlash('error');
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="<?= e(implode('; ', App\Middleware\SecurityHeaders::cspDirectives(csp_nonce()))) ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title><?= e($title ?? 'Admin') ?> · Admin · <?= e(business('name')) ?></title>

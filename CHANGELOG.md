@@ -2,6 +2,49 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-24 (night) — Live on dubaitowingexperts.com
+
+The site is deployed and running on Hostinger. Document root is a symlink to `public/`, so no PHP
+source is web-reachable. Database created, migrated and seeded; the owner's admin account exists.
+
+### Added
+- **Content moved from local to live**: 21 media items with their files, 6 services, 30 areas,
+  4 projects, 15 FAQs, 3 blog posts and the site settings — the site now looks live exactly as it
+  was approved locally.
+- `tools/export-content.php` — dumps the editable content tables to SQL for moving a database
+  between environments. Accounts, logs, leads and throttling data are never exported, and
+  **reviews are excluded on purpose**: real reviews only exist in production, and a development
+  database collects test rows from `tests/admin-e2e.php` that must never reach the live site.
+- `public/favicon.ico` (16/32/48) — browsers request `/favicon.ico` regardless of the `<link>`
+  tags, and it was returning 404.
+
+### Fixed
+- **The Content-Security-Policy was being thrown away in production.** Hostinger's LiteSpeed
+  replaces the header PHP sends with its own `upgrade-insecure-requests`, so the site was live with
+  no CSP at all. The nonce-based policy is now emitted as a `<meta http-equiv>` tag, which no host
+  can rewrite, and `.htaccess` sends `frame-ancestors` (the one directive meta cannot carry).
+  Decision D-014. Verified live: the full policy is enforced and no page reports a violation.
+- `database/create-admin.php` crashed on hosts that disable `shell_exec` (Hostinger does). It now
+  falls back to reading the password without hiding it instead of failing.
+- `tools/deploy.ps1` broke when the SSH key path contained a space (`C:\Users\One Click\...`) —
+  the remote-install arguments are now quoted.
+
+### Verified live
+- `tests/seo-audit.php` — **31 pages crawled, 0 errors**.
+- All key URLs 200; `http://`, `www.`, non-slash and `/index.php` each redirect once; the removed
+  Battery Jump Start page still 301s to Roadside Assistance; unknown URLs 404.
+- Admin login, dashboard, leads and media all work against the live database.
+- No horizontal overflow at 390/768/1440px; no console errors or CSP violations.
+- Security headers present: HSTS, CSP, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Permissions-Policy`, `X-Frame-Options`, `Cross-Origin-Opener-Policy`.
+
+### Notes
+- Hostinger's CDN shows a "Checking your browser" interstitial to headless automation. Real
+  browsers and Googlebot are served normally (tested), but automated screenshot tooling must be
+  pointed at a local copy.
+- `MAIL_TO` is empty, so lead emails are not sent yet — leads are still stored and visible in
+  Admin → Contact Requests. Set the owner's email in `.env` to enable notifications.
+
 ## 2026-09-24 (night) — Deployment tooling
 
 ### Added

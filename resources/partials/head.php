@@ -3,6 +3,7 @@
 $robots = config('app.force_noindex') ? 'noindex,nofollow' : $seo->robots;
 ?>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="<?= e(implode('; ', App\Middleware\SecurityHeaders::cspDirectives(csp_nonce()))) ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title><?= e($seo->title) ?></title>
 <?php if ($seo->description !== ''): ?>
@@ -31,6 +32,7 @@ $robots = config('app.force_noindex') ? 'noindex,nofollow' : $seo->robots;
 <meta name="theme-color" content="#0B2545">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="<?= e(asset('css/fonts.css')) ?>">

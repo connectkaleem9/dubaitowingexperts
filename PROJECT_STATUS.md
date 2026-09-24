@@ -1,11 +1,15 @@
 # Project Status
 
-Updated: 2026-09-22 · Maintained by the Project Manager agent · Read `CLAUDE.md` first.
+Updated: 2026-09-24 · Maintained by the Project Manager agent · Read `CLAUDE.md` first.
 
 ## Where the project is
 
-**Phase 1 (foundation, research, SEO plan, build, admin, tests, docs): complete and verified locally.**
-The website runs end to end: 27 public pages, full admin dashboard, all four test suites green.
+**The site is LIVE at https://dubaitowingexperts.com** — deployed 2026-09-24 to Hostinger, with the
+database created, migrated, seeded and filled with the content approved locally. Admin dashboard
+works against the live database. 31 pages crawl clean.
+
+What is left is not code: real photos in the new brand, real project details, first customer reviews,
+a GTM container ID and a lead-notification email. All of those need the owner.
 
 | Phase | Status |
 |---|---|
@@ -22,15 +26,37 @@ The website runs end to end: 27 public pages, full admin dashboard, all four tes
 | 10. Analytics/Ads wiring | ✅ Code done — ⏳ needs a GTM container ID |
 | 11. Automated tests + SEO audit | ✅ Done, all green |
 | 12. Real content (photos, projects, reviews) | ⛔ Blocked — needs the owner |
-| 13. Staging deploy, device testing, Lighthouse | ⏳ Next |
-| 14. Launch + Google Ads go-live | ⏳ After 12–13 |
+| 13. Production deploy (Hostinger, HTTPS, DB, content) | ✅ Done 2026-09-24 |
+| 14. Search Console + Google Ads go-live | ⏳ Needs the owner's accounts |
 
-## Verified on 2026-09-22 (local)
+## Verified on 2026-09-24 (live — https://dubaitowingexperts.com)
 
-- `php tests/run.php <url>` — 42/42 passed
-- `php tests/seo-audit.php <url>` — 27 pages, 0 errors, 0 warnings
-- `php tests/admin-e2e.php <url>` — 29/29 checks passed
+- `php tests/seo-audit.php https://dubaitowingexperts.com` — **31 pages, 0 errors**
+- Every key URL returns 200; `http://`, `www.`, non-slash and `/index.php` each redirect once;
+  the retired Battery Jump Start URL still 301s; unknown URLs 404
+- Admin login → dashboard → leads → media all work against the live database
+- No horizontal overflow at 390/768/1440px; no console errors and no CSP violations
+- Security headers all present (HSTS, CSP, nosniff, Referrer-Policy, Permissions-Policy,
+  X-Frame-Options, COOP)
+
+### Verified locally before deploying
+
+- `php tests/run.php <url>` — 44/44 passed
+- `php tests/admin-e2e.php <url>` — 30/30 checks passed
 - `php -l` across every PHP file — 0 syntax errors
+
+### Live environment
+
+| | |
+|---|---|
+| Host | Hostinger shared (`sg-nme-web1100.main-hosting.eu`), PHP 8.3.33, MariaDB 11.8.9 |
+| Project root | `~/dubaitowingexperts` — **outside** the web root |
+| Document root | `~/domains/dubaitowingexperts.com/public_html` → symlink to `~/dubaitowingexperts/public` |
+| Deploy | `tools/deploy.ps1` over SSH (port 65002, key `~/.ssh/dte_deploy`); backs up code + database first |
+| Repository | https://github.com/connectkaleem9/dubaitowingexperts |
+
+Hostinger's CDN shows a "Checking your browser" interstitial to headless automation. Real browsers
+and Googlebot are served normally (tested), so run `tools/shots.js` against a local copy, not live.
 
 ## Design (added 2026-09-22)
 
@@ -111,7 +137,11 @@ recorded in `docs/decisions.md`.
    and your social profile links (Facebook / Instagram / YouTube / LinkedIn) shown in the design.
 5. **Accounts to create/share:** Google Business Profile, Google Tag Manager, Google Analytics 4,
    Google Ads, Search Console, and the hosting + domain login.
-6. **Lead notification email** to receive enquiries.
+6. **Lead notification email** to receive enquiries. `MAIL_TO` in the server's `.env` is currently
+   empty, so no enquiry emails are sent — leads are still captured and visible in
+   Admin → Contact Requests, but nobody is alerted.
+7. **Admin account email**: the owner login was created as `yasiiikhan427@gmail.com`. Change it (and
+   the password) in Admin → Admin Users if it should belong to someone else.
 
 ## Next tasks (in order)
 

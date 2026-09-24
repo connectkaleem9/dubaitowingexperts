@@ -30,12 +30,14 @@ if (Admin::findByEmail($email)) {
 
 $readHidden = static function (string $prompt): string {
     echo $prompt;
-    $isWindows = stripos(PHP_OS_FAMILY, 'Windows') === 0;
-    if (!$isWindows) {
+    // Hiding the input needs stty, which many shared hosts disable. Without it the password is
+    // still read correctly, it is simply echoed to the terminal.
+    $canHide = stripos(PHP_OS_FAMILY, 'Windows') !== 0 && function_exists('shell_exec');
+    if ($canHide) {
         shell_exec('stty -echo');
     }
     $value = rtrim((string) fgets(STDIN), "\r\n");
-    if (!$isWindows) {
+    if ($canHide) {
         shell_exec('stty echo');
     }
     echo PHP_EOL;

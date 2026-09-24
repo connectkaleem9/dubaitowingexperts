@@ -1,11 +1,39 @@
 # Deployment
 
-Updated 2026-09-22 · Target: typical UAE shared/cPanel hosting with Apache, PHP 8.1+, MySQL 8 / MariaDB 10.6+
+Updated 2026-09-24 · Target: typical UAE shared/cPanel hosting with Apache, PHP 8.1+, MySQL 8 / MariaDB 10.6+
 
 ## Requirements
 
 PHP extensions: `pdo_mysql`, `mbstring`, `gd` (with WebP), `fileinfo`, `dom`, `json`, `exif` (optional).
 Apache modules: `mod_rewrite`, ideally `mod_headers` and `mod_deflate`.
+
+## The live site
+
+Deployed 2026-09-24. Hostinger shared hosting, PHP 8.3.33, MariaDB 11.8.9.
+
+| | |
+|---|---|
+| URL | https://dubaitowingexperts.com |
+| Project root | `~/dubaitowingexperts` (outside the web root) |
+| Document root | `~/domains/dubaitowingexperts.com/public_html` → symlink to `~/dubaitowingexperts/public` |
+| SSH | port 65002, key `~/.ssh/dte_deploy` |
+| Backups | every deploy writes `~/dte-backups/code-<stamp>.tar.gz` and `db-<stamp>.sql` |
+
+Two host quirks are worth knowing:
+
+- **LiteSpeed overwrites the CSP header.** The policy is therefore served as a `<meta>` tag and
+  `.htaccess` carries only `frame-ancestors` (decision D-014). If the CSP ever looks wrong, check
+  `App\Middleware\SecurityHeaders::cspDirectives()` — it feeds both.
+- **`shell_exec` is disabled**, so CLI scripts must not depend on it.
+- **The CDN challenges headless browsers** with a "Checking your browser" page. Real browsers and
+  Googlebot are unaffected; point screenshot tooling at a local copy.
+
+### Moving content between environments
+
+`php tools/export-content.php` writes `deploy/content.sql` (media, services, areas, projects, FAQs,
+posts, SEO overrides, settings). Copy it up and `mysql -u<user> -p <db> < content.sql`, then copy
+`public/uploads/` across so the media files match the rows. Accounts, logs, leads and **reviews** are
+never exported — reviews must only ever be real ones entered in production.
 
 ## Deploying over SSH (scripted)
 

@@ -163,7 +163,9 @@ $remote = $remoteTemplate.
 # which bash would read as part of the first command.
 $remoteScript = Join-Path $env:TEMP "dte-remote-$stamp.sh"
 [System.IO.File]::WriteAllText($remoteScript, ($remote -replace "`r`n", "`n"), (New-Object System.Text.ASCIIEncoding))
-$sshCmd = 'ssh ' + ($sshArgs -join ' ') + " $target `"bash -s`" < `"$remoteScript`""
+# Quote every argument: key paths routinely contain spaces (e.g. C:\Users\One Click\.ssh\...).
+$quoted = $sshArgs | ForEach-Object { '"' + $_ + '"' }
+$sshCmd = 'ssh ' + ($quoted -join ' ') + " `"$target`" `"bash -s`" < `"$remoteScript`""
 & cmd /c $sshCmd
 $sshExit = $LASTEXITCODE
 Remove-Item $remoteScript -Force -ErrorAction SilentlyContinue
