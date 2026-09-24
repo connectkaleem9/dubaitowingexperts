@@ -193,39 +193,26 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
  */
 .hero--photo { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
 /*
- * Phones: the photo fills the whole hero and the copy sits on top of it, so the section reads as
- * one block instead of a picture with text stranded underneath.
+ * Phones (owner's reference, 2026-09-25): the complete photo sits as a clean band across the top —
+ * nothing over it, nothing cropped — and the copy follows on solid navy. The two read as one block
+ * because the panel behind the copy is dark like the photo; the earlier light panel was what made
+ * the section look unfinished, not the split itself.
  *
- * The home hero uses a portrait crop (hero-bg-mobile.webp, built from the same photo). The 1920x800
- * original is far too wide for an upright phone hero: `cover` would throw away most of its width and
- * leave a close-up of the cab, which is why the truck was unrecognisable here.
- *
- * The scrim is heaviest at the top, where the headline sits over open sky, and lightens towards the
- * bottom so the truck stays visible. Nothing that needs 4.5:1 is left over the white bodywork: the
- * copy ends above the truck, and the buttons carry their own solid colour.
- * .hero--bg (service and area pages) keeps an even scrim over its own --hero-img.
+ * The band's height is the photo's own aspect ratio at full width (1920x800, so 41.667vw), which is
+ * why nothing is cropped. .hero--bg (service and area pages) does the same from its --hero-img,
+ * with the ratio passed in as --hero-ratio because those photos are not all the same shape.
  */
 @media (max-width: 899px) {
     .hero--photo, .hero--bg {
         background-color: var(--c-navy-900);
         background-repeat: no-repeat;
-        background-size: cover;
-        padding: var(--s-7) 0 var(--s-8);
-    }
-    .hero--photo {
-        background-image:
-            linear-gradient(180deg, rgba(1, 27, 48, .82) 0%, rgba(1, 27, 48, .70) 40%,
-                                    rgba(1, 27, 48, .42) 70%, rgba(1, 27, 48, .22) 100%),
-            url('/assets/img/hero-bg-mobile.webp');
+        background-size: 100% auto;
         background-position: top center;
-        padding-bottom: 52vw;   /* clear space at the bottom so the truck is not sat on by the copy */
+        padding: var(--s-6) 0 var(--s-7);
     }
-    .hero--bg {
-        background-image:
-            linear-gradient(180deg, rgba(1, 27, 48, .72) 0%, rgba(1, 27, 48, .80) 55%, rgba(1, 27, 48, .88) 100%),
-            var(--hero-img);
-        background-position: center;
-    }
+    /* The photo's full-width height, so the band shows all of it and the copy starts below. */
+    .hero--photo { background-image: url('/assets/img/hero-bg.webp'); padding-top: calc(41.667vw + var(--s-6)); }
+    .hero--bg { background-image: var(--hero-img); padding-top: calc(var(--hero-ratio, 60%) + var(--s-6)); }
     .hero--photo h1, .hero--bg h1,
     .hero--photo .eyebrow, .hero--bg .eyebrow { color: #fff; }
     .hero--photo h1 .accent, .hero--bg h1 .accent { color: var(--c-red-on-dark); }
@@ -234,6 +221,9 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
     .hero--photo .hero__phone a, .hero--bg .hero__phone a { color: #fff; }
     .hero--photo .trust-list, .hero--bg .trust-list { color: rgba(255, 255, 255, .93); }
     .hero--photo .trust-list .icon, .hero--bg .trust-list .icon { color: var(--c-red-on-dark); }
+    /* Call and WhatsApp share one row across the full width, as in the reference. */
+    .hero--photo .btn-row, .hero--bg .btn-row { flex-wrap: nowrap; gap: var(--s-2); }
+    .hero--photo .btn-row > .btn, .hero--bg .btn-row > .btn { flex: 1 1 0; min-width: 0; padding-inline: 12px; }
     .hero--photo .hero__stats { border-top-color: rgba(255, 255, 255, .22); }
     .hero--photo .hero__stats .icon, .hero--photo .hero__stats strong { color: #fff; }
     .hero--photo .hero__stats span { color: rgba(255, 255, 255, .78); }
@@ -511,12 +501,12 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
     /* Hero stats — dark pills, because the hero behind them is now the photo, not a light panel.
        .86 keeps the labels past 4.5:1 even where a pill lands on the truck's white bodywork. */
     .marquee--stats { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(255,255,255,.22); }
-    /* No edge fade here: the default one fades to the light page surface, which paints white
-       bands down both sides of the strip once the hero behind it is a photo. */
-    .marquee--stats::before, .marquee--stats::after { display: none; }
+    /* The default fade is to the light page surface; here the panel behind is navy. */
+    .marquee--stats::before { background: linear-gradient(90deg, var(--c-navy-900), rgba(1,27,48,0)); }
+    .marquee--stats::after { background: linear-gradient(270deg, var(--c-navy-900), rgba(1,27,48,0)); }
     .marquee--stats .marquee__group > li {
         width: 215px; padding: 10px 14px; border-radius: var(--r-md);
-        background: rgba(1,27,48,.86); border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
     }
     /* Why-choose strip */
     .marquee--usp .marquee__group > li { width: 132px; text-align: center; }
@@ -698,7 +688,10 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .form--card { background: #fff; border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: var(--s-5); box-shadow: var(--sh-1); }
 .form__row { display: grid; gap: var(--s-4); }
 @media (min-width: 640px) { .form__row--2 { grid-template-columns: 1fr 1fr; } }
-.field { display: grid; gap: 6px; }
+/* align-content keeps each row at its natural height. Without it a field stretches to match the
+   taller column beside it, and the extra space lands on the input — which is why a select sat
+   lower and taller than the text box next to it. */
+.field { display: grid; gap: 6px; align-content: start; }
 .field label, .field legend { font-weight: 600; font-size: .92rem; color: var(--c-heading); }
 .field .req { color: var(--c-red); }
 .field .hint { font-size: var(--fs-small); color: var(--c-muted); }

@@ -2,6 +2,30 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-25 — Mobile hero to the owner's reference, form alignment, first reviews
+
+### Changed
+- **Mobile hero rebuilt to the reference the owner sent**: the complete photo as a clean band
+  across the top — nothing over it, nothing cropped — and the copy below it on solid navy. The
+  earlier attempts kept the split but left the copy on a light panel, which is what made the
+  section look unfinished; matching the panel to the photo is what ties the two together. Call and
+  WhatsApp now share one row across the full width. Service and area heroes follow the same shape,
+  using each photo's own aspect ratio.
+- **Form fields in a two-column row now line up.** A `.field` stretched to match the taller column
+  beside it and the spare height landed on the input, so a select sat lower and taller than the
+  text box next to it. Fixes every two-column row on the site, not just the review form.
+
+### Added
+- **The owner's five customer reviews** (`customer_reviews.txt`) loaded into the live database as
+  **pending**. Approving a review publishes it, and that stays the owner's decision in
+  Admin → Reviews. Two carry an admin note: one describes a battery jump start, a service removed
+  from the site at the owner's request, and one mentions the Dubai–Abu Dhabi highway, while the
+  site states coverage is Dubai only.
+
+### Removed
+- `hero-bg-mobile.webp` and `tools/make-hero-mobile.php` — the portrait crop they existed for is
+  not needed now that the phone hero shows the photo whole.
+
 ## 2026-09-24 (night) — Mobile hero photo and a shorter review form
 
 ### Changed
