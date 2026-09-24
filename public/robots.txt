@@ -1,0 +1,15 @@
+# Dubai Towing Experts — robots.txt (see docs/seo/technical-seo.md)
+User-agent: *
+Disallow: /admin/
+Disallow: /thank-you/
+Disallow: /*?*utm_
+Disallow: /*?*gclid=
+
+# Google Ads landing-page checks must be able to crawl everything, including /landing/.
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+Sitemap: https://dubaitowingexperts.com/sitemap.xml

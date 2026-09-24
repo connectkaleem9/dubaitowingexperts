@@ -1,0 +1,2086 @@
+DUBAI RECOVERY EXPERTS
+MASTER WEBSITE DEVELOPMENT, SEO & GOOGLE ADS PLAN
+
+Website: dubairecoveryexperts.com
+Business Name: Dubai Recovery Experts
+Phone: 0525851934
+Address: Dubai - UAE
+Technology: HTML5 + CSS3 + JavaScript + PHP + MySQL
+Primary Market: Dubai, UAE
+Primary Goals:
+1. Generate qualified recovery-service leads.
+2. Rank organically for relevant Dubai recovery searches.
+3. Build a strong Local SEO foundation.
+4. Build Google Ads-ready landing pages and conversion tracking.
+5. Create scalable service and area pages.
+6. Provide a secure admin dashboard for projects and reviews.
+7. Build a fast, mobile-first, conversion-focused website.
+8. Allow the business to manage projects and customer reviews without developer involvement.
+
+============================================================
+1. PROJECT STRATEGY
+============================================================
+
+This website must be built as a Local SEO + Google Ads lead-generation website, not merely as a brochure website.
+
+The architecture must connect:
+
+Keyword Research
+    ->
+Search Intent
+    ->
+Page Architecture
+    ->
+SEO Content
+    ->
+Internal Linking
+    ->
+Google Ads Landing Pages
+    ->
+Conversion Tracking
+    ->
+Lead Generation
+
+The website must be designed from the beginning for:
+- Organic Google Search
+- Google Maps / Local SEO support
+- Google Ads
+- Phone calls
+- WhatsApp inquiries
+- Contact/quote forms
+- Mobile users
+- Emergency-intent searches
+
+Do not attempt to place every keyword on every page.
+
+Instead:
+- Build a complete keyword universe.
+- Group keywords by search intent.
+- Map each keyword cluster to the most appropriate page.
+- Create unique pages only when the search intent and content justify them.
+- Never create thin doorway-style pages simply by changing a location name.
+
+============================================================
+2. MASTER CLAUDE.MD
+============================================================
+
+The FIRST project artifact must be:
+
+CLAUDE.md
+
+CLAUDE.md is the master operating system for Claude.
+
+It must define:
+
+- Project identity
+- Business information
+- Technology stack
+- Folder architecture
+- Coding standards
+- SEO standards
+- Google Ads standards
+- Local SEO standards
+- Security standards
+- Design standards
+- Content standards
+- Database standards
+- Accessibility standards
+- Performance standards
+- Testing standards
+- Deployment standards
+- Agent responsibilities
+- Skills
+- Development workflow
+- Documentation requirements
+- Decision-making rules
+- Rules for autonomous execution
+
+Core rules:
+
+1. Do not change approved architecture without a documented reason.
+2. Do not remove working functionality unnecessarily.
+3. Do not overwrite completed work without checking dependencies.
+4. Do not invent business information.
+5. Do not invent services.
+6. Do not invent reviews.
+7. Do not invent projects.
+8. Do not publish fake statistics.
+9. Do not create fake certifications.
+10. Do not keyword-stuff content.
+11. Do not create duplicate SEO pages.
+12. Do not create thin location pages.
+13. Use clean, semantic HTML.
+14. Use secure PHP development practices.
+15. Use prepared SQL statements.
+16. Validate and sanitize every user input.
+17. Escape output appropriately.
+18. Protect admin functionality.
+19. Protect file uploads.
+20. Never expose credentials.
+21. Keep mobile-first design.
+22. Keep pages fast.
+23. Maintain canonical URLs.
+24. Maintain sitemap.xml.
+25. Maintain robots.txt.
+26. Maintain SEO metadata.
+27. Maintain schema where appropriate.
+28. Maintain internal linking.
+29. Maintain conversion tracking.
+30. Document important decisions.
+31. Test before considering functionality complete.
+32. Do not repeatedly ask the user questions when the answer already exists in project documentation.
+33. Make reasonable implementation decisions independently.
+34. Ask the user only when a genuinely business-critical decision cannot be determined from the available project information.
+
+============================================================
+3. CLAUDE AGENT SYSTEM
+============================================================
+
+Create specialized agents.
+
+AGENT 1 - PROJECT MANAGER AGENT
+
+Responsibilities:
+- Manage overall project
+- Track progress
+- Maintain PROJECT_STATUS.md
+- Maintain CHANGELOG.md
+- Track dependencies
+- Prevent scope drift
+- Ensure agents follow CLAUDE.md
+- Review completed work
+- Coordinate other agents
+
+AGENT 2 - MARKET RESEARCH AGENT
+
+Responsibilities:
+- Research Dubai vehicle recovery market
+- Research competitors
+- Research competitor services
+- Research competitor website structures
+- Research customer search intent
+- Research service demand
+- Research terminology used in Dubai
+- Identify genuine service categories
+- Identify relevant geographic areas
+
+Outputs:
+docs/research/market-research.md
+docs/research/competitor-analysis.md
+docs/research/service-research.md
+
+AGENT 3 - KEYWORD RESEARCH AGENT
+
+Responsibilities:
+- Build complete keyword database
+- Identify commercial keywords
+- Identify transactional keywords
+- Identify emergency keywords
+- Identify informational keywords
+- Identify local keywords
+- Identify long-tail keywords
+- Identify service + location combinations
+- Group keywords into clusters
+- Map keywords to URLs
+- Identify negative Google Ads keywords
+
+Outputs:
+docs/seo/keyword-research.md
+docs/seo/keyword-map.md
+docs/seo/google-ads-keywords.md
+docs/seo/negative-keywords.md
+
+AGENT 4 - SEO STRATEGY AGENT
+
+Responsibilities:
+- Build website SEO architecture
+- Map search intent to pages
+- Define primary/secondary keywords
+- Define titles
+- Define meta descriptions
+- Define H1/H2/H3 structures
+- Define internal linking
+- Define canonical strategy
+- Define sitemap strategy
+- Define schema strategy
+- Define Local SEO strategy
+
+AGENT 5 - TECHNICAL SEO AGENT
+
+Responsibilities:
+- Technical SEO
+- Crawlability
+- Indexability
+- Canonicals
+- Sitemap
+- Robots
+- Redirects
+- 404 handling
+- Broken links
+- URL structure
+- Structured data
+- Open Graph
+- Image SEO
+- Core Web Vitals
+- Mobile SEO
+- Search Console readiness
+
+AGENT 6 - LOCAL SEO AGENT
+
+Responsibilities:
+- Dubai location research
+- Area page strategy
+- LocalBusiness schema
+- NAP consistency
+- Contact/location architecture
+- Service area architecture
+- Google Business Profile support
+- Local internal linking
+- Local keyword mapping
+
+AGENT 7 - GOOGLE ADS AGENT
+
+Responsibilities:
+- Google Ads keyword research
+- Search intent grouping
+- Ad group structure
+- Landing page mapping
+- Negative keywords
+- Conversion tracking requirements
+- Phone conversion tracking
+- WhatsApp conversion tracking
+- Form conversion tracking
+- Landing page quality requirements
+
+AGENT 8 - UX/UI DESIGN AGENT
+
+Responsibilities:
+- Design system
+- Page layouts
+- Responsive design
+- Mobile-first design
+- Emergency CTA visibility
+- Conversion-focused UX
+- Accessibility
+- Component consistency
+
+AGENT 9 - FRONTEND DEVELOPMENT AGENT
+
+Responsibilities:
+- HTML
+- CSS
+- JavaScript
+- Responsive UI
+- Reusable components
+- Accessibility
+- Performance
+- Frontend validation
+
+AGENT 10 - PHP BACKEND AGENT
+
+Responsibilities:
+- PHP architecture
+- Routing
+- Controllers
+- Models
+- Services
+- Forms
+- Authentication
+- CRUD operations
+- Database integration
+- Security
+
+AGENT 11 - DATABASE AGENT
+
+Responsibilities:
+- MySQL schema
+- Relationships
+- Indexes
+- Constraints
+- Migrations
+- Database security
+- Query optimization
+
+AGENT 12 - SECURITY AGENT
+
+Responsibilities:
+- Authentication security
+- Authorization
+- CSRF
+- XSS
+- SQL injection prevention
+- Session security
+- File-upload security
+- Rate limiting where appropriate
+- Admin protection
+- Security audit
+
+AGENT 13 - CONTENT AGENT
+
+Responsibilities:
+- Homepage content
+- Service pages
+- Area pages
+- About
+- FAQ
+- Project content
+- Blog content
+- Legal content
+- Meta descriptions
+- CTA copy
+
+Never invent factual business claims.
+
+AGENT 14 - SCHEMA/DATA AGENT
+
+Responsibilities:
+- LocalBusiness schema
+- Organization schema
+- Service schema
+- WebSite schema
+- WebPage schema
+- BreadcrumbList
+- FAQPage where eligible
+- Review/AggregateRating only when genuinely supported
+- Article schema
+- Validate structured data
+
+AGENT 15 - QA/TESTING AGENT
+
+Responsibilities:
+- Functional testing
+- SEO testing
+- Mobile testing
+- Browser testing
+- Security testing
+- Form testing
+- Admin testing
+- Broken-link testing
+- Performance testing
+- Pre-launch testing
+
+============================================================
+4. SKILLS TO DEFINE
+============================================================
+
+Claude must define reusable project skills for:
+
+- Keyword research
+- Keyword clustering
+- Search intent mapping
+- Local SEO
+- On-page SEO
+- Technical SEO
+- Google Ads landing page optimization
+- Conversion optimization
+- HTML development
+- CSS development
+- PHP development
+- MySQL development
+- Secure form development
+- Admin dashboard development
+- Image optimization
+- Schema implementation
+- Accessibility
+- Performance optimization
+- QA testing
+- Deployment
+
+Each skill should contain:
+- Purpose
+- Inputs
+- Process
+- Rules
+- Output
+- Validation checklist
+
+============================================================
+5. BUSINESS INFORMATION
+============================================================
+
+Business Name:
+Dubai Recovery Experts
+
+Domain:
+dubairecoveryexperts.com
+
+Phone:
+0525851934
+
+Location:
+Dubai - UAE
+
+Primary Market:
+Dubai
+
+All business information must remain consistent throughout:
+- Header
+- Footer
+- Contact page
+- Schema
+- Metadata where relevant
+- Ads landing pages
+- Forms
+- Local SEO assets
+
+Do not invent:
+- Exact street address
+- Operating hours
+- Years of experience
+- Number of vehicles
+- Certifications
+- Licenses
+- Prices
+- Response-time guarantees
+- Service guarantees
+unless the business owner provides them.
+
+============================================================
+6. KEYWORD RESEARCH
+============================================================
+
+The keyword research agent must research and organize keywords around actual search demand.
+
+CORE KEYWORDS:
+
+- car recovery Dubai
+- car recovery service Dubai
+- vehicle recovery Dubai
+- vehicle recovery service Dubai
+- recovery service Dubai
+- recovery company Dubai
+- Dubai recovery service
+- Dubai car recovery
+- Dubai vehicle recovery
+- car towing Dubai
+- towing service Dubai
+- towing company Dubai
+- vehicle towing Dubai
+- roadside assistance Dubai
+- roadside assistance service Dubai
+
+EMERGENCY KEYWORDS:
+
+- emergency car recovery Dubai
+- emergency vehicle recovery Dubai
+- 24 hour car recovery Dubai
+- 24/7 car recovery Dubai
+- emergency towing Dubai
+- 24 hour towing Dubai
+- breakdown recovery Dubai
+- car breakdown recovery Dubai
+- emergency roadside assistance Dubai
+
+SERVICE KEYWORDS:
+
+- car recovery
+- vehicle recovery
+- towing service
+- accident recovery
+- breakdown recovery
+- flat tyre assistance
+- roadside assistance
+- car towing
+- vehicle towing
+- emergency recovery
+- accident towing
+- car breakdown assistance
+- battery jump start
+- fuel delivery
+- car transport
+- vehicle transport
+
+These are starting research categories, NOT instructions to claim every service.
+
+Only create service pages for services the business actually provides.
+
+The research agent must identify:
+- Search volume
+- Search intent
+- Commercial value
+- Competition
+- Related queries
+- Long-tail variations
+- Location variations
+- Google Ads suitability
+
+============================================================
+7. DUBAI AREA RESEARCH
+============================================================
+
+Research actual search demand and service coverage for areas such as:
+
+- Downtown Dubai
+- Business Bay
+- Dubai Marina
+- Jumeirah
+- Deira
+- Bur Dubai
+- Al Barsha
+- Al Quoz
+- JVC
+- Jumeirah Village Circle
+- Dubai Silicon Oasis
+- Dubai Hills
+- Arabian Ranches
+- International City
+- Mirdif
+- Al Nahda Dubai
+- Al Qusais
+- Rashidiya
+- Umm Suqeim
+- Al Satwa
+- DIFC
+- Palm Jumeirah
+- Discovery Gardens
+- Motor City
+- Dubai Sports City
+- Dubai Investment Park
+- Dubai Production City
+- Nad Al Sheba
+- Al Warqa
+- Dubai South
+- Dubai Airport
+- Al Garhoud
+
+Do not automatically create all of these pages.
+
+Create area pages only where:
+- The business actually serves the area.
+- There is useful local search intent.
+- The page can provide unique value.
+- The page will not be a thin duplicate.
+
+============================================================
+8. WEBSITE ARCHITECTURE
+============================================================
+
+Recommended structure:
+
+/
+├── about/
+├── services/
+│   ├── car-recovery/
+│   ├── vehicle-recovery/
+│   ├── towing-service/
+│   ├── roadside-assistance/
+│   ├── accident-recovery/
+│   ├── breakdown-recovery/
+│   └── flat-tyre-assistance/
+│
+├── areas/
+│   ├── downtown-dubai/
+│   ├── dubai-marina/
+│   ├── business-bay/
+│   ├── deira/
+│   ├── bur-dubai/
+│   └── ...
+│
+├── projects/
+├── reviews/
+├── faq/
+├── blog/
+├── contact/
+├── privacy-policy/
+├── terms-and-conditions/
+├── disclaimer/
+├── cookie-policy/
+└── thank-you/
+
+Final service structure must depend on actual business offerings and keyword research.
+
+============================================================
+9. HOMEPAGE
+============================================================
+
+Primary homepage search intent:
+Car Recovery Dubai / Vehicle Recovery Dubai / Recovery Service Dubai
+
+Recommended sections:
+
+1. Header
+2. Hero
+3. Emergency call/WhatsApp CTA
+4. Core services
+5. Why Choose Dubai Recovery Experts
+6. How Recovery Works
+7. Recovery vehicles/equipment
+8. Areas We Serve
+9. Recent Projects
+10. Customer Reviews
+11. FAQ
+12. Contact/Request Service
+13. Final CTA
+14. Footer
+
+Header:
+- Logo
+- Services
+- Areas
+- Projects
+- Reviews
+- About
+- FAQ
+- Contact
+- Call button
+- WhatsApp button
+
+Hero:
+- Clear recovery-focused H1
+- Supporting copy
+- Call Now CTA
+- WhatsApp CTA
+- Service/area context
+- Strong trust elements without fabricated claims
+
+============================================================
+10. SERVICE PAGES
+============================================================
+
+Every important real service gets a dedicated page.
+
+Example:
+
+/services/car-recovery/
+
+Each service page should contain:
+
+- Unique SEO title
+- Unique meta description
+- Canonical
+- H1
+- Introduction
+- Service details
+- When customers need the service
+- Process
+- Benefits
+- Relevant equipment/vehicles if factual
+- Service coverage
+- FAQs
+- Reviews
+- Related services
+- CTA
+- Phone
+- WhatsApp
+- Breadcrumb
+- Appropriate schema
+- Internal links
+
+Do not copy the same page and replace the service name.
+
+============================================================
+11. GOOGLE ADS LANDING PAGE STRATEGY
+============================================================
+
+Do not send every Google Ads campaign to the homepage.
+
+Example:
+
+Car Recovery Dubai campaign
+    ->
+/services/car-recovery/
+
+Towing Dubai campaign
+    ->
+/services/towing-service/
+
+Roadside Assistance Dubai campaign
+    ->
+/services/roadside-assistance/
+
+Where necessary, create campaign-focused landing pages:
+
+/landing/car-recovery-dubai/
+/landing/emergency-towing-dubai/
+/landing/roadside-assistance-dubai/
+
+Paid landing pages should be:
+- Fast
+- Mobile-first
+- Highly relevant
+- Clear
+- Conversion focused
+- Phone focused
+- WhatsApp focused
+- Form focused
+- Free of unnecessary distractions
+
+Do not create thin duplicate SEO pages.
+
+============================================================
+12. AREA PAGES
+============================================================
+
+Recommended URL:
+
+/areas/downtown-dubai/
+/areas/dubai-marina/
+/areas/business-bay/
+
+Each area page must contain unique useful content:
+
+- Area-specific introduction
+- Recovery situations relevant to the area
+- Services available
+- Local context
+- Service coverage
+- FAQs
+- Relevant internal links
+- Contact CTA
+- Phone CTA
+- WhatsApp CTA
+- Unique SEO title
+- Unique meta description
+- H1
+- Canonical
+- Schema where appropriate
+- Breadcrumb
+
+Avoid creating hundreds of almost-identical pages.
+
+============================================================
+13. PROJECTS SYSTEM
+============================================================
+
+Public page:
+
+/projects/
+
+Individual project pages:
+
+/projects/project-slug/
+
+Each project can contain:
+
+- Project title
+- Slug
+- Service
+- Location
+- Date
+- Short description
+- Full description
+- Featured image
+- Before image
+- After image
+- Gallery
+- SEO title
+- Meta description
+- Image alt text
+- Publish/draft status
+
+Projects must be genuine.
+
+============================================================
+14. PROJECT ADMIN DASHBOARD
+============================================================
+
+Create a secure admin dashboard.
+
+Dashboard modules:
+
+- Dashboard
+- Projects
+- Reviews
+- Services
+- Areas
+- FAQs
+- Contact Requests
+- Media
+- SEO
+- Site Settings
+- Admin Users
+- Security
+- Activity Logs
+
+Project CRUD:
+
+- Add project
+- Edit project
+- Delete project
+- Publish
+- Unpublish
+- Upload images
+- Set featured image
+- Assign service
+- Assign area
+- Edit SEO metadata
+
+Admin must be able to manage projects without editing code.
+
+============================================================
+15. REVIEWS SYSTEM
+============================================================
+
+Public page:
+
+/reviews/
+
+Review form fields:
+
+- Name
+- Email/Phone if required
+- Service
+- Rating
+- Review
+- Optional image
+- Consent
+- Submit
+
+Workflow:
+
+Customer submits review
+        ->
+Pending
+        ->
+Admin reviews
+        ->
+Approve or Reject
+        ->
+Published if approved
+
+Admin capabilities:
+- View
+- Approve
+- Reject
+- Edit
+- Delete
+- Feature
+- Unfeature
+- Hide
+- Filter
+- Search
+
+Never automatically publish unmoderated content if moderation is required.
+
+Never create fake reviews.
+
+Never fabricate ratings.
+
+============================================================
+16. LEAD/CONTACT SYSTEM
+============================================================
+
+Lead form fields:
+
+- Name
+- Phone
+- Service Required
+- Location
+- Vehicle Type
+- Message
+- Preferred Contact Method
+
+Store submissions in MySQL.
+
+Lead statuses:
+
+- New
+- Contacted
+- In Progress
+- Completed
+- Cancelled
+
+Admin dashboard should display recent leads.
+
+============================================================
+17. PHONE CTA
+============================================================
+
+Use:
+
+tel:0525851934
+
+Display the business phone consistently.
+
+Phone CTA should appear in:
+- Header
+- Hero
+- Service pages
+- Area pages
+- Contact page
+- Footer
+- Mobile sticky CTA
+- Ads landing pages
+
+============================================================
+18. WHATSAPP CTA
+============================================================
+
+Use the business number for WhatsApp.
+
+Create context-aware prefilled messages.
+
+Example:
+
+Hello Dubai Recovery Experts, I need car recovery assistance in Dubai. My location is ______.
+
+Service-specific messages can be used.
+
+Track WhatsApp clicks as conversion events.
+
+============================================================
+19. ANALYTICS & CONVERSION TRACKING
+============================================================
+
+Prepare for:
+
+- Google Analytics 4
+- Google Search Console
+- Google Tag Manager
+- Google Ads conversion tracking
+
+Events:
+
+- page_view
+- phone_click
+- whatsapp_click
+- form_start
+- form_submit
+- quote_request
+- review_submit
+- project_view
+- service_view
+- area_view
+
+Primary conversions:
+
+- Phone call
+- WhatsApp click
+- Lead form submission
+- Quote/request submission
+
+Secondary conversions:
+- Important engagement events
+
+Document all tracking in:
+
+docs/analytics-tracking.md
+
+============================================================
+20. ON-PAGE SEO
+============================================================
+
+Every indexable page must have:
+
+- SEO title
+- Meta description
+- Canonical
+- H1
+- Search intent
+- Primary keyword
+- Secondary keywords
+- OG title
+- OG description
+- OG image
+- Schema where appropriate
+- Breadcrumb
+- Internal links
+- Image alt text
+- CTA
+
+Titles and descriptions must be written for users, not keyword stuffing.
+
+============================================================
+21. INTERNAL LINKING
+============================================================
+
+Create a logical network.
+
+Homepage
+    ->
+Services
+    ->
+Individual Services
+    ->
+Relevant Areas
+    ->
+Projects
+    ->
+Reviews
+
+Example:
+
+Car Recovery page links to:
+- Towing
+- Accident Recovery
+- Breakdown Recovery
+- Downtown Dubai
+- Dubai Marina
+- Business Bay
+- Projects
+- Reviews
+
+Area pages link to relevant services.
+
+Do not use excessive exact-match anchor text.
+
+============================================================
+22. TECHNICAL SEO
+============================================================
+
+Implement:
+
+- Semantic HTML5
+- Clean URLs
+- One clear H1
+- Proper heading hierarchy
+- Canonicals
+- XML sitemap
+- Robots.txt
+- 404 page
+- Proper redirects
+- HTTPS
+- Mobile-first design
+- Fast loading
+- Crawlable content
+- Accessible navigation
+- Image optimization
+- Structured data
+- Open Graph
+- Breadcrumbs
+
+Clean URL example:
+
+/services/car-recovery/
+
+Avoid:
+
+/service.php?id=23
+
+============================================================
+23. SITEMAP
+============================================================
+
+Create:
+
+/sitemap.xml
+
+Include appropriate indexable:
+- Pages
+- Services
+- Areas
+- Projects
+- Blog posts
+
+Exclude:
+- Admin
+- Login
+- Thank-you
+- Utility URLs
+- Duplicate URLs
+
+Keep sitemap automatically updated for dynamic content.
+
+============================================================
+24. ROBOTS.TXT
+============================================================
+
+Create:
+
+/robots.txt
+
+Protect:
+- Admin areas
+- Private system directories
+- Sensitive files
+
+Do not accidentally block important public pages or Google Ads crawling.
+
+============================================================
+25. SCHEMA
+============================================================
+
+Use appropriate structured data only when supported.
+
+Potential schemas:
+
+- LocalBusiness
+- Organization
+- WebSite
+- WebPage
+- Service
+- BreadcrumbList
+- FAQPage where eligible
+- Review where eligible
+- AggregateRating only where legitimately supported
+- Article
+
+Do not create fake review/rating schema.
+
+============================================================
+26. LOCAL SEO
+============================================================
+
+Maintain consistent business information:
+
+Business Name:
+Dubai Recovery Experts
+
+Phone:
+0525851934
+
+Location:
+Dubai, UAE
+
+Use consistent information on:
+- Website
+- Footer
+- Contact page
+- Schema
+- Google Business Profile
+- Local citations
+
+Contact page:
+
+/contact/
+
+Include:
+- Phone
+- WhatsApp
+- Location
+- Contact form
+- Map where appropriate
+- Service areas
+- FAQs
+
+Do not invent an exact street address if one has not been provided.
+
+============================================================
+27. IMAGE SEO
+============================================================
+
+Images should be:
+
+- Properly compressed
+- WebP where appropriate
+- Correctly sized
+- Responsive
+- Lazy-loaded below the fold
+- Given descriptive filenames
+- Given accurate alt text
+
+Example:
+
+dubai-car-recovery-service.webp
+
+Avoid generic filenames such as:
+
+IMG_9837.jpg
+
+============================================================
+28. PERFORMANCE
+============================================================
+
+Target excellent Core Web Vitals.
+
+Optimize:
+- LCP
+- CLS
+- INP
+- TTFB
+- Image loading
+- CSS
+- JavaScript
+- Fonts
+- Server response
+
+Test:
+- 320px
+- 375px
+- 390px
+- 414px
+- 768px
+- 1024px
+- 1280px
+- 1440px
+- 1920px
+
+Mobile performance is a high priority because a large portion of recovery searches will be made from phones.
+
+============================================================
+29. ACCESSIBILITY
+============================================================
+
+Implement:
+
+- Semantic HTML
+- Keyboard navigation
+- Accessible forms
+- Visible focus states
+- Proper labels
+- Appropriate ARIA only where necessary
+- Sufficient contrast
+- Alt text
+- Accessible buttons
+- Accessible navigation
+- Error messages
+
+============================================================
+30. SECURITY
+============================================================
+
+PHP security must include:
+
+- PDO prepared statements
+- CSRF protection
+- Password hashing
+- Secure sessions
+- Authentication
+- Authorization
+- Login protection
+- Input validation
+- Output escaping
+- File upload validation
+- MIME validation
+- File-size restrictions
+- Secure filenames
+- Admin route protection
+- No exposed credentials
+- No SQL injection vulnerabilities
+- No XSS vulnerabilities
+- No insecure direct object access
+- Appropriate security headers
+
+============================================================
+31. DATABASE
+============================================================
+
+Minimum tables:
+
+admins
+services
+areas
+projects
+project_images
+reviews
+review_images
+contact_submissions
+faqs
+media
+seo_metadata
+settings
+activity_logs
+
+Potential additional tables:
+
+admin_sessions
+password_resets
+service_area_relationships
+lead_statuses
+
+Use:
+- Primary keys
+- Foreign keys
+- Proper indexes
+- Constraints
+- Secure queries
+
+============================================================
+32. PHP ARCHITECTURE
+============================================================
+
+Use a clean reusable architecture.
+
+Recommended:
+
+/app
+    /Controllers
+    /Models
+    /Services
+    /Helpers
+    /Middleware
+    /Validation
+
+/config
+
+/database
+
+/public
+    /index.php
+    /assets
+    /images
+
+/routes
+
+/resources
+    /views
+    /partials
+
+/admin
+
+/storage
+    /uploads
+    /logs
+
+/docs
+
+/tests
+
+Keep:
+- Database logic
+- Business logic
+- Presentation
+separated as much as practical.
+
+============================================================
+33. REUSABLE COMPONENTS
+============================================================
+
+Build reusable components for:
+
+- Header
+- Footer
+- CTA
+- Service card
+- Area card
+- Review card
+- Project card
+- FAQ
+- Breadcrumb
+- Contact form
+- WhatsApp button
+- Call button
+- Mobile navigation
+- Alerts
+- Forms
+
+Do not duplicate large blocks of code unnecessarily.
+
+============================================================
+34. DESIGN SYSTEM
+============================================================
+
+Design Agent must define:
+
+- Primary color
+- Secondary color
+- Accent
+- Background
+- Text
+- Muted text
+- Success
+- Error
+- Border
+- Typography
+- Heading sizes
+- Spacing
+- Container width
+- Buttons
+- Cards
+- Forms
+- Icons
+- Shadows
+- Radius
+- Breakpoints
+
+Design direction:
+
+Professional
+Emergency-ready
+Trustworthy
+Modern
+Dubai-focused
+Conversion-oriented
+
+Avoid generic template appearance.
+
+============================================================
+35. CONTENT RULES
+============================================================
+
+Content must be:
+
+- Original
+- Helpful
+- Service-specific
+- Location-specific
+- Commercially useful
+- Clear
+- Human-readable
+- Conversion-oriented
+
+Never:
+- Spin competitor content
+- Copy competitors
+- Stuff keywords
+- Invent claims
+- Invent reviews
+- Invent certifications
+- Invent experience
+- Invent statistics
+- Publish unsupported guarantees
+
+============================================================
+36. FAQ SYSTEM
+============================================================
+
+Create:
+
+/faq/
+
+Topics may include:
+
+- Recovery availability
+- Emergency recovery
+- Dubai coverage
+- Towing
+- Roadside assistance
+- Breakdown assistance
+- Accident recovery
+- Flat tyres
+- Response process
+- Quotes
+- Payment
+- Vehicle types
+- Service areas
+
+Only provide answers supported by actual business information.
+
+============================================================
+37. BLOG
+============================================================
+
+Create:
+
+/blog/
+
+Blog content should target genuine informational searches.
+
+Potential topics:
+
+- What to do when your car breaks down in Dubai
+- What to do after a vehicle accident in Dubai
+- How vehicle recovery works
+- What to do with a flat tyre
+- Roadside emergency safety
+- Car recovery preparation
+- Dubai vehicle breakdown guidance
+
+Do not create low-quality articles simply to increase page count.
+
+============================================================
+38. LEGAL PAGES
+============================================================
+
+Create:
+
+/privacy-policy/
+/terms-and-conditions/
+/cookie-policy/
+/disclaimer/
+/thank-you/
+
+Legal pages must be appropriate to the actual business.
+
+Do not copy another company's legal text blindly.
+
+============================================================
+39. GOOGLE ADS STRUCTURE
+============================================================
+
+Potential campaign structure:
+
+Campaign:
+Car Recovery Dubai
+
+Ad groups:
+- Car Recovery
+- Emergency Car Recovery
+- 24 Hour Car Recovery
+
+Campaign:
+Towing Dubai
+
+Ad groups:
+- Towing Service
+- Car Towing
+- Vehicle Towing
+
+Campaign:
+Roadside Assistance Dubai
+
+Ad groups:
+- Roadside Assistance
+- Breakdown Assistance
+- Emergency Assistance
+
+Final structure must be based on actual keyword research.
+
+============================================================
+40. GOOGLE ADS LANDING PAGE MAPPING
+============================================================
+
+Example:
+
+Keyword:
+car recovery Dubai
+Landing page:
+/services/car-recovery/
+
+Keyword:
+towing service Dubai
+Landing page:
+/services/towing-service/
+
+Keyword:
+roadside assistance Dubai
+Landing page:
+/services/roadside-assistance/
+
+Keyword:
+car recovery Dubai Marina
+Landing page:
+/areas/dubai-marina/
+
+The landing page must closely match:
+- Keyword
+- Ad
+- User intent
+- CTA
+
+============================================================
+41. NEGATIVE KEYWORDS
+============================================================
+
+Research negative keywords such as:
+
+- jobs
+- career
+- salary
+- training
+- course
+- license
+- DIY
+- free
+- used recovery truck
+- recovery truck for sale
+- recovery equipment
+- toy recovery
+- game
+
+Do not blindly add negatives.
+
+Validate search intent before adding them.
+
+============================================================
+42. CONVERSION OPTIMIZATION
+============================================================
+
+Primary CTAs:
+
+CALL NOW
+WHATSAPP NOW
+REQUEST RECOVERY
+GET A QUOTE
+
+CTA placement:
+- Header
+- Hero
+- Service sections
+- Area sections
+- Project pages
+- Reviews
+- Contact page
+- Footer
+- Mobile sticky bar
+- Ads landing pages
+
+Keep emergency contact actions easy to access.
+
+============================================================
+43. ADMIN DASHBOARD
+============================================================
+
+Admin dashboard should include:
+
+Dashboard
+Projects
+Reviews
+Services
+Areas
+FAQs
+Contact Requests
+Media
+SEO
+Settings
+Admin Users
+Security
+Activity Logs
+
+Dashboard metrics:
+
+- Total projects
+- Published projects
+- Pending reviews
+- Published reviews
+- New inquiries
+- Recent leads
+
+============================================================
+44. PROJECT CRUD
+============================================================
+
+Admin can:
+
+- Create
+- Read
+- Update
+- Delete
+- Publish
+- Unpublish
+- Upload images
+- Set featured image
+- Assign service
+- Assign location
+- Edit SEO metadata
+
+Project pages must be generated dynamically and remain SEO-friendly.
+
+============================================================
+45. REVIEW CRUD
+============================================================
+
+Admin can:
+
+- View
+- Approve
+- Reject
+- Edit
+- Delete
+- Feature
+- Unfeature
+- Hide
+- Filter
+- Search
+
+Customer submissions should enter a controlled moderation workflow.
+
+============================================================
+46. SEO DOCUMENTATION
+============================================================
+
+Maintain:
+
+/docs/seo/
+    keyword-research.md
+    keyword-map.md
+    internal-link-map.md
+    schema-map.md
+    technical-seo.md
+    on-page-seo.md
+    local-seo.md
+    google-ads.md
+    conversion-tracking.md
+    redirect-map.md
+
+============================================================
+47. DEVELOPMENT DOCUMENTATION
+============================================================
+
+Maintain:
+
+/docs/
+    architecture.md
+    database.md
+    security.md
+    deployment.md
+    testing.md
+    analytics-tracking.md
+    research/
+    seo/
+    design/
+
+Root files:
+
+CLAUDE.md
+README.md
+CHANGELOG.md
+PROJECT_STATUS.md
+
+Update these files throughout development.
+
+============================================================
+48. AUTOMATED SEO CHECKS
+============================================================
+
+Every indexable page must be checked for:
+
+- URL
+- HTTP status
+- HTTPS
+- Canonical
+- Title
+- Meta description
+- H1
+- Heading hierarchy
+- Indexability
+- Robots
+- Sitemap inclusion
+- Schema
+- Breadcrumb
+- Internal links
+- Images
+- Alt text
+- Mobile responsiveness
+- CTA
+- Phone
+- WhatsApp
+- Performance
+
+============================================================
+49. AUTOMATED TESTING
+============================================================
+
+Functional tests:
+
+- Navigation
+- Mobile menu
+- Forms
+- WhatsApp
+- Phone links
+- Admin login
+- Project CRUD
+- Review submission
+- Review moderation
+- Image upload
+- Contact submission
+- Filters
+- Pagination
+- Search
+
+SEO tests:
+
+- Broken links
+- Duplicate titles
+- Duplicate descriptions
+- Missing H1
+- Incorrect canonicals
+- 404 errors
+- Redirect chains
+- Sitemap
+- Robots
+- Schema
+
+Security tests:
+
+- SQL injection
+- XSS
+- CSRF
+- Authentication bypass
+- Unauthorized admin access
+- File upload vulnerabilities
+- Session issues
+
+============================================================
+50. GOOGLE ADS PRE-LAUNCH CHECKLIST
+============================================================
+
+Before launching Google Ads:
+
+- Website live
+- HTTPS working
+- Mobile optimized
+- Phone working
+- WhatsApp working
+- Forms working
+- Thank-you page working
+- Conversion tracking working
+- Relevant landing pages
+- No broken links
+- No 404 errors
+- Ads crawler access configured correctly
+- robots.txt checked
+- sitemap.xml available
+- privacy policy
+- terms
+- cookie policy
+- disclaimer
+- contact information
+- business information
+- original landing-page content
+
+============================================================
+51. FINAL PROJECT STRUCTURE
+============================================================
+
+dubairecoveryexperts/
+|
+├── CLAUDE.md
+├── README.md
+├── CHANGELOG.md
+├── PROJECT_STATUS.md
+|
+├── app/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Services/
+│   ├── Helpers/
+│   ├── Middleware/
+│   └── Validation/
+|
+├── config/
+├── database/
+├── routes/
+|
+├── public/
+│   ├── index.php
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── assets/
+|
+├── resources/
+│   ├── views/
+│   └── partials/
+|
+├── admin/
+|
+├── storage/
+│   ├── uploads/
+│   └── logs/
+|
+├── docs/
+│   ├── research/
+│   ├── seo/
+│   ├── architecture/
+│   ├── design/
+│   ├── security/
+│   └── deployment/
+|
+└── tests/
+
+============================================================
+52. AUTONOMOUS CLAUDE WORKFLOW
+============================================================
+
+Claude must follow this workflow continuously:
+
+1. Read CLAUDE.md.
+2. Read PROJECT_STATUS.md.
+3. Read relevant research/documentation.
+4. Check existing implementation.
+5. Identify current objective.
+6. Check dependencies.
+7. Perform required research.
+8. Update documentation if needed.
+9. Implement.
+10. Test.
+11. Fix errors.
+12. Run SEO/security/performance checks where relevant.
+13. Update CHANGELOG.md.
+14. Update PROJECT_STATUS.md.
+15. Continue to the next logical task.
+
+Claude should not repeatedly ask:
+- What should I do next?
+- Which page should I build?
+- What SEO should I use?
+- What should the design be?
+- What should the next feature be?
+
+The project documentation should answer these questions.
+
+Ask the user only when:
+- A business-critical fact is genuinely missing.
+- A required service is unknown.
+- A legally important business decision is required.
+- A destructive or irreversible decision needs explicit approval.
+- The project requirements conflict and cannot be resolved safely.
+
+============================================================
+53. KEYWORD MAPPING PHILOSOPHY
+============================================================
+
+Do NOT add every keyword to every page.
+
+Use:
+
+Keyword
+    ->
+Search Intent
+    ->
+Keyword Cluster
+    ->
+Page Type
+    ->
+URL
+    ->
+Primary Keyword
+    ->
+Secondary Keywords
+    ->
+Content
+    ->
+Internal Links
+    ->
+Conversion
+
+Examples:
+
+"car recovery Dubai"
+    ->
+Commercial
+    ->
+Car Recovery Service
+    ->
+/services/car-recovery/
+
+"car recovery Dubai Marina"
+    ->
+Local Commercial
+    ->
+Dubai Marina Area
+    ->
+/areas/dubai-marina/
+
+"what to do when car breaks down in Dubai"
+    ->
+Informational
+    ->
+Guide
+    ->
+/blog/car-breakdown-dubai/
+
+This approach provides broad keyword coverage without keyword stuffing or unnecessary duplicate pages.
+
+============================================================
+54. IMPORTANT SEO PRINCIPLE
+============================================================
+
+The goal is NOT to create the largest number of pages.
+
+The goal is to create the strongest useful page for each meaningful search intent.
+
+A page should exist because:
+- Users need it.
+- Search demand supports it.
+- The business actually serves the intent.
+- The page can provide unique value.
+- The page can convert visitors appropriately.
+
+============================================================
+55. IMPORTANT GOOGLE ADS PRINCIPLE
+============================================================
+
+The goal is NOT simply to send traffic.
+
+The website must make the journey:
+
+Search
+    ->
+Ad
+    ->
+Relevant Landing Page
+    ->
+Clear Service Information
+    ->
+Trust
+    ->
+Call / WhatsApp / Form
+    ->
+Lead
+
+Every paid landing page should be directly relevant to its ad group and search intent.
+
+============================================================
+56. FINAL QUALITY STANDARD
+============================================================
+
+Before declaring the website complete, Claude must verify:
+
+SEO:
+- Complete keyword map
+- Correct page mapping
+- Unique metadata
+- Correct headings
+- Internal linking
+- Canonicals
+- Sitemap
+- Robots
+- Schema
+- Image SEO
+- Local SEO
+- No obvious technical SEO issues
+
+Google Ads:
+- Relevant landing pages
+- Mobile-first experience
+- Fast pages
+- Clear CTA
+- Call tracking
+- WhatsApp tracking
+- Form tracking
+- Thank-you flow
+- Ads crawler accessibility
+
+Development:
+- Clean HTML
+- Maintainable CSS
+- Secure PHP
+- MySQL optimization
+- Reusable components
+- Admin dashboard
+- Project management
+- Review management
+- Lead management
+
+Security:
+- Authentication
+- Authorization
+- CSRF
+- XSS
+- SQL injection protection
+- Secure file uploads
+- Secure sessions
+- No exposed credentials
+
+UX:
+- Clear navigation
+- Strong emergency CTAs
+- Mobile optimization
+- Accessible forms
+- Consistent design
+- Fast interactions
+
+Content:
+- Original
+- Accurate
+- Helpful
+- Service-specific
+- Location-specific
+- No fake claims
+- No fake reviews
+- No keyword stuffing
+
+============================================================
+57. FINAL OBJECTIVE
+============================================================
+
+DubaiRecoveryExperts.com must become a technically strong, SEO-ready, Local SEO-focused, Google Ads-ready recovery service website for Dubai.
+
+The final system must allow the business owner to manage:
+- Projects
+- Reviews
+- FAQs
+- Leads
+- Services
+- Areas
+- Media
+- SEO metadata
+
+without requiring code changes for normal content management.
+
+Claude must build the project as a coordinated system of research, SEO, design, frontend, backend, database, security, content, Google Ads and QA agents.
+
+The website must be:
+- Fast
+- Secure
+- Mobile-first
+- SEO-friendly
+- Google Ads-ready
+- Conversion-focused
+- Scalable
+- Maintainable
+- Locally relevant
+- Easy to manage
+
+END OF MASTER PLAN

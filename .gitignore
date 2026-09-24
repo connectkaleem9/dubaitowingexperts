@@ -1,0 +1,14 @@
+.env
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/tools/shots/
+/deploy/
+/public/uploads/*
+!/public/uploads/.htaccess
+!/public/uploads/.gitkeep
+.DS_Store
+Thumbs.db
+/.idea/
+/.vscode/

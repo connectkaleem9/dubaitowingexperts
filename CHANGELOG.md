@@ -1,0 +1,190 @@
+# Changelog
+
+All notable changes to this project. Newest first.
+
+## 2026-09-24 (night) — Deployment tooling
+
+### Added
+- `tools/deploy.ps1` — one-command SSH deploy: builds a clean release (no `.env`, docs, tools, tests
+  or local media), uploads a single archive, extracts it on the server, keeps `.env` and
+  `public/uploads`, fixes permissions and runs migrations. Backs up code **and** database to
+  `../dte-backups/` first, and smoke-tests the live URLs afterwards. `-DryRun` builds only.
+- `tools/make-env.ps1` — generates the production `.env` with a fresh 64-char `APP_KEY`; the DB
+  password is typed at the prompt, never stored in a script. Output lives in git-ignored `deploy/`.
+- `docs/deployment.md` — SSH deploy flow, server prerequisites and rollback steps.
+- Deployment SSH key generated at `~/.ssh/dte_deploy`; its public key goes in the server's
+  `authorized_keys`.
+
+## 2026-09-24 (evening) — Domain and business rename (decision D-013)
+
+### Changed
+- Domain is now **dubaitowingexperts.com** everywhere: canonical host and HTTPS/non-www redirects,
+  robots.txt sitemap line, default `APP_URL`, mail sender, schema and all documentation.
+- Business renamed to **Dubai Towing Experts** across page titles, schema, WhatsApp pre-filled
+  messages, service/area content, media alt text, settings, brand keywords and docs.
+- Page titles now read the name from `config/business.php` (`business('name')`) instead of a
+  hard-coded string — a future rename is a one-line change, as CLAUDE.md §2 requires.
+
+### Added (same day)
+- **New Dubai Towing Experts logo artwork** imported: header version (trimmed from its white
+  background) and footer version (transparent), both WebP. Header height raised to 78px (56px on
+  phones) so the "TOWING EXPERTS" line stays legible, with the header bar at 96px.
+- The Open Graph share image, admin sidebar and admin login now use the new brand too; the old
+  placeholder `logo.svg` was deleted and schema `logo` points at the real artwork.
+
+### Still needs the owner
+- **New photos**: the supplied truck photos are branded with the old name, and one shows the old
+  domain on the truck door.
+
+## 2026-09-24 (later) — Projects slider and reviews carousel
+
+### Changed
+- Home page **projects** are now a continuous slider of compact tiles (photo, title, area/service)
+  with its own Pause/Play control, matching the approved design.
+- Home page **reviews** are now a carousel — one review at a time with previous/next arrows and
+  dots, wrapping, and arrow-key support. With no approved reviews it still shows the invitation card.
+- Section headings in that two-column block keep their "View all …" link on the same line.
+- Review captions no longer start with a stray separator when the service/area fields are empty.
+
+## 2026-09-24 — Accident Recovery photo and project photos
+
+### Added
+- **Accident Recovery service photo** imported and linked — every service page now has its own image.
+- Four **project photos** imported into the media library and **published as projects** (Luxury SUV
+  Recovery, Emergency Roadside Assistance, Luxury Vehicle Recovery, SUV Breakdown Recovery), each
+  linked to its service. Descriptions cover the type of job and how the vehicle is handled, with no
+  invented dates, areas, names or prices (CLAUDE.md §2) — the owner can add the real details later.
+- Projects listing: card headings are now `h2`, fixing an H1 → H3 jump flagged by the SEO audit.
+
+## 2026-09-23 (late) — Mobile sliders and hero background
+
+### Changed
+- **Mobile hero** now uses the photo as the section's background image at full width and full
+  strength, so the complete picture is visible (no crop, no wash) with the copy beneath it.
+- **Hero stats (24/7 · Clear price · Careful handling · All over Dubai)** slide right → left on
+  phones; from 900px up they are the usual static row.
+- **"Why choose us" six points** slide right → left on phones; unchanged six-across grid on desktop.
+- Each slider has its own Pause/Play control; the hazard strip stays removed.
+
+## 2026-09-23 (evening) — Hero clean-up and navigation
+
+### Changed
+- Hero now has two CTAs only: **Call Now** and **WhatsApp Now** ("Request a Quote" removed).
+- The red/navy hazard strip was removed from the hero **and from the Ads landing pages**.
+- **Mobile hero**: the complete photo is now a full-width banner at the top of the hero, with the
+  headline, copy, buttons and stats beneath it — nothing cropped or washed out.
+- **Header navigation trimmed**: FAQ and Blog removed from the top menu (they remain in the footer
+  Quick Links, which also gained Reviews and Contact), keeping the main nav short on laptops.
+
+## 2026-09-23 (later) — Hero, slider and areas refinements
+
+### Fixed
+- **Services slider looked like a static row with a scrollbar** for anyone whose OS has "reduce
+  motion" enabled: the global reduced-motion rule was killing the animation and the fallback turned
+  the row into a scroller. The marquee is now excluded from that rule, slows to 60s instead of
+  stopping, never shows a scrollbar, and has a visible **Pause/Play button** (WCAG 2.2.2).
+- `tools/shots.js` was screenshotting cached CSS, which hid layout changes — it now disables the
+  network cache before each capture.
+
+### Changed
+- **Hero rebuilt to the supplied reference**: photo on the right dissolving into a clean light panel,
+  copy and the four stats clear of the truck, three CTAs on one row, and the "Anytime, anywhere"
+  script line back over the sky.
+- **Areas section now lists every area we cover** as pin + name tiles. Areas with a written page
+  link to it; the rest are plain tiles (no dead links, no thin pages). The `/areas/` hub gained a
+  matching "We also cover" list.
+
+## 2026-09-23 — Owner artwork and section changes
+
+### Added
+- Owner's photography imported and optimised: hero background, "Why choose us" background,
+  "Stuck on the road?" card background (WebP, 38–158 KB each with contrast-safe overlays) and five
+  service photos into the media library, linked to their service pages.
+- Owner's logo artwork in the header (navy) and footer (white), replacing the drawn placeholder mark.
+- **Services row is now a continuous auto-slider**, moving left → right, pausing on hover/focus,
+  duplicated track for a seamless loop, and replaced by a swipeable row under `prefers-reduced-motion`.
+
+### Changed
+- **Areas section shows place names only** — no images, per the owner's instruction. Tiles flow to
+  fill the row whatever the number of published areas.
+- **How It Works** rebuilt to the supplied reference: full-width row of three steps with the red
+  "Need immediate help?" card beside the heading, titles no longer wrapping.
+- Hero stats sit on a translucent panel so every label stays legible over the photo.
+
+### Removed
+- **Battery Jump Start** service (owner's instruction) — deleted from the database and the seed file,
+  with a 301 from `/services/battery-jump-start/` to `/services/roadside-assistance/`.
+
+## 2026-09-22 — Homepage design implemented (decisions D-011, D-012)
+
+### Added
+- The owner's design (`docs/design/reference/`) is now the site's look: navy top bar, white sticky
+  header with dropdown navigation and a red phone button, gradient hero with skyline, stat row and
+  hazard-chevron divider, six-up service cards, navy "Why choose us" band, three-step section with a
+  red "Need immediate help?" card, area photo cards, projects + reviews columns, FAQ accordion beside
+  the blue "Stuck on the road?" card, and the five-column footer.
+- Self-hosted Poppins (latin subset, 5 weights, 38 KB) — no third-party font request.
+- New tow-truck logo, favicon, Apple touch icon and Open Graph image in the new palette.
+- **Battery Jump Start** service page (included in the design) with original content.
+- Homepage hero photo slot: Settings → *Homepage hero photo*, so the owner's truck photo drops into
+  the hero exactly as drawn. Service and area cards do the same with their own images.
+- `tools/shots.js` — screenshots every page at chosen widths with real mobile emulation and fails on
+  horizontal overflow; used to verify 320–1440px.
+
+### Changed
+- Unverifiable claims in the mock-up were replaced rather than copied (see decision D-012):
+  no "30–45 minutes average response", no fleet/experience claims, no sample review, no unconfirmed
+  email address.
+- Photography-dependent components degrade to branded placeholders until real photos are uploaded.
+
+## 2026-09-22 — Owner answers applied (decision D-010)
+
+### Changed
+- **24/7 availability confirmed** and published: home page title/H1/trust list/"why us", contact page
+  title, CTA blocks, all three Ads landing pages, a new FAQ, and schema `openingHours Mo-Su 00:00-23:59`.
+  The 24-hour ad group is enabled and ads may now run at all hours.
+- **Coverage stated as Dubai only**: areas FAQ updated; other emirates added as account-level negative
+  keywords in `docs/seo/negative-keywords.md`.
+- **Response time**: no fixed time is promised anywhere. New FAQ explains we give an honest arrival
+  estimate on the call; ad copy rules forbid arrival-time claims.
+- `CLAUDE.md`, keyword research/map, Google Ads plan and local SEO docs updated to match.
+
+## 2026-09-22 — Initial build
+
+### Added
+- **Project foundation**: `CLAUDE.md` (operating rules), 15 agent definitions in `.claude/agents/`,
+  20 reusable skills in `.claude/skills/`, decision log (`docs/decisions.md`).
+- **Research**: Dubai recovery market and competitor analysis (10+ competitors reviewed), service
+  research with a cannibalisation review, UAE terminology and accident-reporting context.
+- **SEO planning**: keyword universe with intent and priority, keyword→URL map, Google Ads keyword
+  plan, validated negative-keyword list, on-page/technical/local SEO specs, internal link map,
+  schema map, redirect map, conversion-tracking plan.
+- **Application**: custom PHP MVC (router with trailing-slash canonicalisation, request, view,
+  PDO wrapper, session, CSRF, auth), 13 models, services for SEO, schema, sitemap, uploads, HTML
+  sanitising, anti-spam and mail.
+- **Public site**: home, services hub + 6 service pages, areas hub + 5 area pages, projects, reviews
+  (with moderated submission form), FAQ, blog + 3 guides, about, contact, 4 legal pages, thank-you,
+  3 Google Ads landing pages, dynamic `sitemap.xml`, `robots.txt`, 404/500 pages.
+- **Design system**: navy + safety-amber theme, chevron motif, mobile-first CSS with tokens, sticky
+  mobile call/WhatsApp bar, accessible forms, inline SVG icon sprite, generated logo/favicon/OG image.
+- **Conversion features**: context-aware WhatsApp pre-filled messages, "Send my location" (geolocation
+  → map pin in WhatsApp), lead/quote forms with campaign attribution (UTM + GCLID), GTM + Consent
+  Mode v2 wiring and `dataLayer` events for calls, WhatsApp, forms and page types.
+- **Admin dashboard**: dashboard with setup warnings, contact requests (pipeline, notes, CSV export),
+  projects CRUD with image upload and gallery, review moderation, services, areas (with a thin-page
+  guard), FAQs, blog, media library with alt-text editing, per-path SEO overrides, site settings,
+  admin users with roles, activity log, security page with password change and live checks.
+- **Database**: 16-table schema with foreign keys and indexes, migration runner, idempotent seeder,
+  admin creation CLI.
+- **Security**: prepared statements, CSRF everywhere, Argon2id passwords, login throttling and
+  lockout, session hardening, allow-list HTML sanitiser, nonce-based CSP, secure upload pipeline
+  (finfo + GD re-encode + EXIF strip), honeypot/time-trap/rate limits, hashed IPs, activity audit log.
+- **Tests**: `tests/run.php` (42 unit + functional + security tests), `tests/seo-audit.php`
+  (site crawler and on-page SEO audit), `tests/admin-e2e.php` (29 admin workflow checks).
+- **Documentation**: README, architecture, database, security, deployment, testing, analytics,
+  design system, and the SEO/research document set.
+
+### Notes
+- All services and the five area pages are seeded as published; every factual claim is limited to what
+  the brief confirms. No hours, prices, response times, licences or ratings are published anywhere.
+- Projects and reviews are intentionally empty — they must contain real jobs and real customer reviews.

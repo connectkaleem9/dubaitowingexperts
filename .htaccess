@@ -1,0 +1,10 @@
+# Safety net: if the host's document root is the project root instead of public/,
+# route everything into public/ and never serve source files.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.env|\.git|app|admin|config|database|docs|resources|routes|storage|tests|\.claude)(/|$) - [F,L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+<FilesMatch "^\.|\.(md|sql|txt|log|example)$">
+    Require all denied
+</FilesMatch>
