@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Core\ErrorHandler;
 use App\Core\Request;
 use App\Core\Session;
 use App\Models\Review;
@@ -12,7 +11,6 @@ use App\Models\Service;
 use App\Services\FormGuard;
 use App\Services\SampleContent;
 use App\Services\Seo;
-use App\Services\Uploader;
 use App\Validation\Validator;
 
 final class ReviewController extends Controller
@@ -59,8 +57,7 @@ final class ReviewController extends Controller
             'area_text' => 'nullable|max:120|no_links',
             'rating' => 'required|int|min_value:1|max_value:5',
             'body' => 'required|min:20|max:2000',
-            'consent' => 'accepted',
-        ], ['body' => 'Your review', 'area_text' => 'Area', 'consent' => 'that we may publish your review']);
+        ], ['body' => 'Your review', 'area_text' => 'Area']);
 
         $errors = $v->errors();
         if ($guard !== null) {
@@ -76,7 +73,8 @@ final class ReviewController extends Controller
             redirect('/reviews/#review-form');
         }
 
-        $reviewId = Review::create([
+        // Consent is given by sending the form; the wording sits in plain sight beside the button.
+        Review::create([
             'name' => $request->input('name'),
             'email' => $request->input('email') ?: null,
             'phone' => $request->input('phone') ?: null,
@@ -88,19 +86,6 @@ final class ReviewController extends Controller
             'consent_at' => date('Y-m-d H:i:s'),
             'ip_hash' => ip_hash($request->ip()),
         ]);
-
-        $photo = $request->file('photo');
-        if ($photo !== null) {
-            try {
-                $mediaId = Uploader::image($photo, 'Customer photo from review by ' . $request->input('name'), null, 5 * 1024 * 1024);
-                Review::attachImage($reviewId, $mediaId);
-            } catch (\RuntimeException $e) {
-                // Keep the review; the photo is optional. Tell the customer.
-                Session::flash('photo_error', $e->getMessage());
-            } catch (\Throwable $e) {
-                ErrorHandler::report($e);
-            }
-        }
 
         Session::flash('review_submitted', true);
         redirect('/reviews/#review-form');

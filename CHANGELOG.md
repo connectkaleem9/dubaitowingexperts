@@ -2,6 +2,21 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-24 (night) — Mobile hero photo and a shorter review form
+
+### Changed
+- **The mobile hero now uses a portrait crop of the hero photo** (`hero-bg-mobile.webp`, generated
+  from the same original). The source is 1920x800, far too wide for an upright phone hero: `cover`
+  was throwing away most of its width and leaving an unrecognisable close-up of the cab. The new
+  image keeps the whole truck, with sky above it for the headline. The scrim is heaviest at the top
+  and lightens towards the bottom so the truck stays visible, and the copy ends above it.
+- Hero stat pills are dark on phones instead of translucent white, and the marquee's edge fade is
+  switched off there — it fades to the light page surface and was painting white bands down both
+  sides of the strip now that the hero behind it is a photo.
+- **The review form no longer asks for a photo or a consent tick.** Consent is given by sending the
+  form, with the wording in plain sight beside the button and still recorded in `consent_at`.
+  Older reviews that already have photos still show them, in the admin and on the page.
+
 ## 2026-09-24 (late evening) — Reviews page and mobile hero
 
 ### Changed

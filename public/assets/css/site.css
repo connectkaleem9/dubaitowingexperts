@@ -194,20 +194,37 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .hero--photo { background: linear-gradient(115deg, #FFF8F2 0%, #FDF1E9 45%, #EDF2F8 100%); }
 /*
  * Phones: the photo fills the whole hero and the copy sits on top of it, so the section reads as
- * one block instead of a picture with text stranded underneath. A navy scrim over the photo keeps
- * every piece of text above 4.5:1 against the brightest part of the sky.
- * .hero--bg (service and area pages) gets the same treatment from its own --hero-img.
+ * one block instead of a picture with text stranded underneath.
+ *
+ * The home hero uses a portrait crop (hero-bg-mobile.webp, built from the same photo). The 1920x800
+ * original is far too wide for an upright phone hero: `cover` would throw away most of its width and
+ * leave a close-up of the cab, which is why the truck was unrecognisable here.
+ *
+ * The scrim is heaviest at the top, where the headline sits over open sky, and lightens towards the
+ * bottom so the truck stays visible. Nothing that needs 4.5:1 is left over the white bodywork: the
+ * copy ends above the truck, and the buttons carry their own solid colour.
+ * .hero--bg (service and area pages) keeps an even scrim over its own --hero-img.
  */
 @media (max-width: 899px) {
     .hero--photo, .hero--bg {
         background-color: var(--c-navy-900);
-        background-image:
-            linear-gradient(180deg, rgba(1, 27, 48, .68) 0%, rgba(1, 27, 48, .78) 45%, rgba(1, 27, 48, .92) 100%),
-            var(--hero-img, url('/assets/img/hero-bg.webp'));
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: center;
         padding: var(--s-7) 0 var(--s-8);
+    }
+    .hero--photo {
+        background-image:
+            linear-gradient(180deg, rgba(1, 27, 48, .82) 0%, rgba(1, 27, 48, .70) 40%,
+                                    rgba(1, 27, 48, .42) 70%, rgba(1, 27, 48, .22) 100%),
+            url('/assets/img/hero-bg-mobile.webp');
+        background-position: top center;
+        padding-bottom: 52vw;   /* clear space at the bottom so the truck is not sat on by the copy */
+    }
+    .hero--bg {
+        background-image:
+            linear-gradient(180deg, rgba(1, 27, 48, .72) 0%, rgba(1, 27, 48, .80) 55%, rgba(1, 27, 48, .88) 100%),
+            var(--hero-img);
+        background-position: center;
     }
     .hero--photo h1, .hero--bg h1,
     .hero--photo .eyebrow, .hero--bg .eyebrow { color: #fff; }
@@ -491,11 +508,15 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
     /* Button sits under the strip, never over the content */
     .marquee--mobile { display: flex; flex-direction: column; }
     .marquee--mobile .marquee-toggle { align-self: flex-end; margin-top: var(--s-3); min-height: 36px; padding: 5px 14px; font-size: .78rem; }
-    /* Hero stats */
-    .marquee--stats { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(11,41,70,.14); }
+    /* Hero stats — dark pills, because the hero behind them is now the photo, not a light panel.
+       .86 keeps the labels past 4.5:1 even where a pill lands on the truck's white bodywork. */
+    .marquee--stats { margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid rgba(255,255,255,.22); }
+    /* No edge fade here: the default one fades to the light page surface, which paints white
+       bands down both sides of the strip once the hero behind it is a photo. */
+    .marquee--stats::before, .marquee--stats::after { display: none; }
     .marquee--stats .marquee__group > li {
-        width: 215px; border: 0; padding: 10px 14px; border-radius: var(--r-md);
-        background: rgba(255,255,255,.6);
+        width: 215px; padding: 10px 14px; border-radius: var(--r-md);
+        background: rgba(1,27,48,.86); border: 1px solid rgba(255,255,255,.14);
     }
     /* Why-choose strip */
     .marquee--usp .marquee__group > li { width: 132px; text-align: center; }
@@ -681,6 +702,8 @@ ul, ol { padding-left: 1.2rem; margin: 0 0 var(--s-4); }
 .field label, .field legend { font-weight: 600; font-size: .92rem; color: var(--c-heading); }
 .field .req { color: var(--c-red); }
 .field .hint { font-size: var(--fs-small); color: var(--c-muted); }
+/* Consent wording under the submit button, where the checkbox used to be. */
+.hint--consent { margin: 0; font-size: var(--fs-small); color: var(--c-muted); text-align: center; }
 .input, .select, .textarea {
     width: 100%; min-height: 50px; padding: 12px 14px; font: inherit; font-size: 1rem; color: var(--c-heading);
     background: #fff; border: 1.5px solid var(--c-border); border-radius: var(--r-sm);

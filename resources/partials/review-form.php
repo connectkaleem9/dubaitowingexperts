@@ -1,6 +1,5 @@
 <?php
 /** @var list<array> $services */
-use App\Core\Session;
 use App\Services\FormGuard;
 
 $errors = errors();
@@ -16,7 +15,7 @@ $rating = old('rating');
 // The reviews page puts its own heading above the form; elsewhere the form carries one itself.
 $heading = $heading ?? true;
 ?>
-<form class="form form--card" id="review-form" method="post" action="/reviews/" enctype="multipart/form-data" novalidate data-track-form="review">
+<form class="form form--card" id="review-form" method="post" action="/reviews/" novalidate data-track-form="review">
     <?php if ($heading): ?>
         <div>
             <h2>Leave a review</h2>
@@ -25,7 +24,6 @@ $heading = $heading ?? true;
     <?php endif; ?>
     <?php if (!empty($submitted)): ?>
         <div class="alert alert--success" role="status" data-conversion-event="review_submit">Thank you — your review has been received and will appear once it has been checked.</div>
-        <?php if ($photoError = Session::getFlash('photo_error')): ?><div class="alert alert--info">Your photo could not be added: <?= e($photoError) ?></div><?php endif; ?>
     <?php endif; ?>
     <?php if (isset($errors['_form'])): ?>
         <div class="alert alert--error" role="alert"><?= e($errors['_form']) ?></div>
@@ -90,16 +88,8 @@ $heading = $heading ?? true;
         </div>
     </div>
 
-    <div class="field">
-        <label for="rv-photo">Photo <span class="muted small">(optional, JPG/PNG/WebP up to 5 MB)</span></label>
-        <input class="input" id="rv-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp">
-    </div>
-
-    <?php [$c, $a, $m] = $field('consent'); ?>
-    <div class="field<?= $c ?>">
-        <label class="check"><input type="checkbox" name="consent" value="1"<?= old('consent') === '1' ? ' checked' : '' ?><?= $a ?>> <span>I agree that Dubai Towing Experts may publish my review, name and photo on this website. See our <a href="/privacy-policy/">privacy policy</a>.</span></label>
-        <?= $m ?>
-    </div>
-
     <button class="btn btn--call btn--lg btn--block" type="submit"><?= icon('star') ?>Submit review</button>
+    <?php // Consent is given by sending the form; the wording has to stay in plain sight next to the button. ?>
+    <p class="hint hint--consent">By sending this you agree that <?= e(business('name')) ?> may publish your review and
+        the name you entered on this website. See our <a href="/privacy-policy/">privacy policy</a>.</p>
 </form>
