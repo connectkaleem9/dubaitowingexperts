@@ -9,6 +9,13 @@
         var payload = { event: event, page_type: pageType };
         for (var k in params) { if (Object.prototype.hasOwnProperty.call(params, k)) { payload[k] = params[k]; } }
         dl.push(payload);
+        // A dataLayer push is what Google Tag Manager listens for. Analytics loaded on its own
+        // (gtag.js, no container) does not see those, so send it the event directly as well.
+        if (typeof window.gtag === 'function') {
+            var attrs = { page_type: pageType };
+            for (var j in params) { if (Object.prototype.hasOwnProperty.call(params, j)) { attrs[j] = params[j]; } }
+            window.gtag('event', event, attrs);
+        }
     }
 
     /* Mobile navigation */

@@ -2,6 +2,24 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-09-25 (night) — Google Analytics and Search Console
+
+### Added
+- **Google Analytics 4 can now run on its own**, with just a `G-…` measurement ID and no Tag
+  Manager container to build. `app.js` sends every tracked event (phone taps, WhatsApp taps, form
+  starts and submissions, quote requests) straight to `gtag` as well as to the data layer, so
+  conversions are recorded either way. Setting a GTM container as well still works — they read the
+  same data layer — but do not also create a GA4 tag inside GTM or events are counted twice.
+- **Google Search Console verification**: paste the value from Google's HTML-tag method into
+  settings and it is rendered as `<meta name="google-site-verification">` on every page.
+- Both live in Admin → Site Settings, with validation that rejects a whole meta tag pasted in by
+  mistake or an ID in the wrong format.
+
+### Notes
+- Consent Mode v2 still runs **before** either tag loads, which is what Google requires, and the
+  cookie banner keeps controlling it.
+- Nothing is sent anywhere until the IDs are saved: with both blank, no third-party script loads.
+
 ## 2026-09-25 (evening) — Admin cut down to Projects and Reviews
 
 ### Changed

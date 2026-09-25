@@ -21,7 +21,9 @@ final class SettingsController extends AdminController
         'whatsapp_default_message' => ['Default WhatsApp message', 'textarea', 'Pre-filled text when someone taps a WhatsApp button.', 'nullable|max:300'],
         'fleet_description' => ['Recovery vehicles and equipment', 'textarea', 'Optional home-page section. Describe only equipment you really have. Leave empty to hide the section.', 'nullable|max:1000'],
         'notify_email' => ['Lead notification email', 'text', 'New enquiries are emailed here. They are always saved in Contact Requests as well.', 'nullable|email|max:191'],
-        'gtm_id' => ['Google Tag Manager ID', 'text', 'e.g. GTM-ABC1234. Needed for Google Analytics and Google Ads conversion tracking.', 'nullable|max:20'],
+        'ga4_id' => ['Google Analytics measurement ID', 'text', 'e.g. G-AB12CD34EF. Found in Analytics under Admin → Data streams. This alone is enough for Analytics; no Tag Manager needed.', 'nullable|max:20'],
+        'search_console_token' => ['Google Search Console verification', 'text', 'From Search Console → HTML tag, paste only the content value (a long string of letters and numbers), not the whole tag. Keep it here permanently — Google re-checks it.', 'nullable|max:200'],
+        'gtm_id' => ['Google Tag Manager ID', 'text', 'e.g. GTM-ABC1234. Only needed for Google Ads conversion tracking or more involved setups.', 'nullable|max:20'],
         'consent_default' => ['Cookie consent default', 'select', 'Denied shows a cookie banner and only enables analytics/ads cookies after the visitor accepts.', 'required|in:denied,granted'],
         'default_og_image' => ['Default social sharing image path', 'text', 'e.g. /assets/img/og-default.jpg', 'nullable|max:255'],
         'legal_updated' => ['Legal pages "last updated" date', 'text', 'Shown on the privacy, terms, cookie and disclaimer pages.', 'nullable|max:40'],
@@ -49,6 +51,16 @@ final class SettingsController extends AdminController
         $gtm = $request->input($this->inputName('gtm_id'));
         if ($gtm !== '' && !preg_match('/^GTM-[A-Z0-9]{4,12}$/', $gtm)) {
             $errors[$this->inputName('gtm_id')] = 'Enter a valid container ID such as GTM-ABC1234.';
+        }
+        $ga4 = $request->input($this->inputName('ga4_id'));
+        if ($ga4 !== '' && !preg_match('/^G-[A-Z0-9]{4,15}$/', $ga4)) {
+            $errors[$this->inputName('ga4_id')] = 'Enter a valid measurement ID such as G-AB12CD34EF.';
+        }
+        // Google's own value is base64url; anything else is a whole tag pasted in by mistake.
+        $token = $request->input($this->inputName('search_console_token'));
+        if ($token !== '' && !preg_match('/^[A-Za-z0-9_-]{20,100}$/', $token)) {
+            $errors[$this->inputName('search_console_token')] =
+                'Paste only the content value from the meta tag Google gives you, not the whole tag.';
         }
         $heroId = (int) $request->input($this->inputName('hero_image_id'));
         if ($heroId > 0 && \App\Models\Media::find($heroId) === null) {

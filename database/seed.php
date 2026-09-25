@@ -22,6 +22,8 @@ $isEmpty = static fn (string $table): bool => (int) Database::value("SELECT COUN
 // Settings (only missing keys are added; existing values are never overwritten)
 $settings = [
     'whatsapp_default_message' => 'Hello Dubai Towing Experts, I need recovery assistance in Dubai. My location is: ',
+    'ga4_id' => '',
+    'search_console_token' => '',
     'gtm_id' => '',
     'consent_default' => 'denied',
     'notify_email' => '',

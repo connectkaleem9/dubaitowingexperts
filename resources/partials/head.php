@@ -10,6 +10,15 @@ $robots = config('app.force_noindex') ? 'noindex,nofollow' : $seo->robots;
 <meta name="description" content="<?= e($seo->description) ?>">
 <?php endif; ?>
 <meta name="robots" content="<?= e($robots) ?>">
+<?php
+// Google Search Console ownership. Paste only the content="..." value from the meta tag Google
+// shows under "HTML tag"; set it in Admin → Settings. It has to stay on the site permanently —
+// Google re-checks it, and removing it drops the verification.
+$searchConsole = trim((string) setting('search_console_token', ''));
+?>
+<?php if ($searchConsole !== ''): ?>
+<meta name="google-site-verification" content="<?= e($searchConsole) ?>">
+<?php endif; ?>
 <?php if ($seo->isIndexable()): ?>
 <link rel="canonical" href="<?= e($seo->canonical()) ?>">
 <?php endif; ?>

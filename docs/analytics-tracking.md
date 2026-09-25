@@ -1,13 +1,30 @@
 # Analytics & Conversion Tracking
 
-Owner: Google Ads agent · Updated 2026-09-22 · Status: implemented in code, **not yet connected**
-(no GTM container ID has been supplied — Admin → Site Settings → Google Tag Manager ID).
+Owner: Google Ads agent · Updated 2026-09-25 · Status: wired and waiting for IDs
+(Admin → Site Settings: *Google Analytics measurement ID*, *Google Search Console verification*,
+and *Google Tag Manager ID* if Ads conversions are needed).
+
+## Two ways in, either on its own
+
+| | What it needs | Use it for |
+|---|---|---|
+| **GA4 direct** (`ga4_id`) | A `G-…` measurement ID | Analytics with nothing to configure. `app.js` sends each event straight to `gtag` as well as to the data layer, so conversions arrive without a container. |
+| **Tag Manager** (`gtm_id`) | A `GTM-…` container ID | Google Ads conversions, or anything needing tags beyond Analytics. Reads the same data layer. |
+
+Setting both is fine — they do not conflict, but do not also create a GA4 tag inside GTM or every
+event is counted twice.
+
+**Search Console** ownership is proved by `search_console_token`, rendered as
+`<meta name="google-site-verification">` on every page. Once GA4 is live, Search Console's
+*Google Analytics* method works instead and needs no token. The sitemap to submit is
+`https://dubaitowingexperts.com/sitemap.xml`; `robots.txt` already points at it.
 
 ## How it is wired
 
-- `resources/partials/analytics-head.php` loads **Google Tag Manager** only when a valid `GTM-…` ID
-  is saved in settings, and initialises **Consent Mode v2** (`ad_storage`, `ad_user_data`,
+- `resources/partials/analytics-head.php` loads **GA4**, **Google Tag Manager**, or both, only when
+  a valid ID is saved, and initialises **Consent Mode v2** (`ad_storage`, `ad_user_data`,
   `ad_personalization`, `analytics_storage`) with the default from settings (`denied` by default).
+  Consent is set **before** either tag loads, which is what Google requires.
 - The cookie banner (`resources/partials/consent.php` + `app.js`) records the visitor's choice in
   `localStorage` and sends `gtag('consent','update', …)`. With `consent_default = granted` no banner
   is shown — only choose that if the owner accepts the compliance implications.
@@ -27,7 +44,7 @@ Owner: Google Ads agent · Updated 2026-09-22 · Status: implemented in code, **
 | `service_view` | A `/services/*` page loads | `page_path` |
 | `area_view` | An `/areas/*` page loads | `page_path` |
 | `project_view` | A `/projects/*` page loads | `page_path` |
-| `page_view` | Automatic (GA4 via GTM) | `page_type` is in the data layer before GTM loads |
+| `page_view` | Automatic (GA4, whether direct or via GTM) | `page_type` is set before either tag loads |
 
 `page_type` values: `home`, `services`, `service`, `areas`, `area`, `projects`, `project`, `reviews`,
 `faq`, `contact`, `about`, `blog`, `article`, `legal`, `landing`, `thank_you`, `page`.
