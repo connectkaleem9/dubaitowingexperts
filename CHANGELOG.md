@@ -4,6 +4,17 @@ All notable changes to this project. Newest first.
 
 ## 2026-09-25 (night) — Google Analytics and Search Console
 
+### Live
+- Analytics is running on **G-8X5K0KMRH2** and Search Console ownership is verified by meta tag.
+  Confirmed in a real browser: `page_view` reaches Google with `gcs=G100` before consent and
+  `gcs=G111` after Accept, and `phone_click`, `whatsapp_click` and `form_start` all arrive with
+  their `link_location` / `form_name` parameters. No console errors, no CSP violations.
+
+### Fixed
+- **The cookie banner only appeared when Tag Manager was configured.** A site running Analytics
+  alone would therefore never offer it, consent would stay denied for every visitor, and Google
+  would receive nothing but cookieless pings. It now appears whenever either tag is set.
+
 ### Added
 - **Google Analytics 4 can now run on its own**, with just a `G-…` measurement ID and no Tag
   Manager container to build. `app.js` sends every tracked event (phone taps, WhatsApp taps, form

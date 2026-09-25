@@ -1,6 +1,13 @@
 <?php
-// Shown only when analytics is configured and consent defaults to "denied" (Admin → Settings).
-if (!preg_match('/^GTM-[A-Z0-9]{4,12}$/', (string) setting('gtm_id', '')) || setting('consent_default', 'denied') === 'granted') {
+/*
+ * Shown when analytics is configured and consent defaults to "denied" (Admin → Settings).
+ * The test has to cover Analytics on its own as well as Tag Manager: without it, a site running
+ * only GA4 would never offer the banner, so analytics_storage would stay denied for every visitor
+ * and Google would receive nothing but cookieless pings.
+ */
+$hasTag = preg_match('/^GTM-[A-Z0-9]{4,12}$/', (string) setting('gtm_id', ''))
+    || preg_match('/^G-[A-Z0-9]{4,15}$/', (string) setting('ga4_id', ''));
+if (!$hasTag || setting('consent_default', 'denied') === 'granted') {
     return;
 }
 ?>
